@@ -23,7 +23,8 @@
     "settings": {
         "import/resolver": {
             "alias": [
-                ["@modules", "./src/modules"]
+                ["@modules", "./src/modules"],
+                ["@data", "./src/data"]
             ]
         }
     }

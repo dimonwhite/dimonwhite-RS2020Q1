@@ -108,6 +108,7 @@ module.exports = {
     extensions: ['.js', '.json'],
     alias: {
       '@modules': path.resolve(__dirname, 'src/modules'),
+      '@data': path.resolve(__dirname, 'src/data'),
       '@': path.resolve(__dirname, 'src'),
     },
   },
