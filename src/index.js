@@ -4,6 +4,7 @@ import dataCategories from '@data/categories';
 import Menu from '@modules/menu';
 
 import Categories from '@modules/categories';
+import Cards from '@modules/cards';
 
 const menu = new Menu(dataCategories);
 
@@ -32,9 +33,11 @@ const params = window
   );
 
 if (params.page === undefined) {
-  const categoriesClass = new Categories(dataCategories, mainBlock);
+  const categories = new Categories(dataCategories, mainBlock);
 
-  categoriesClass.init();
+  categories.init();
 } else {
-  console.log('cards');
+  const cards = new Cards(params.page, mainBlock);
+
+  cards.init();
 }
