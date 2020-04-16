@@ -2,9 +2,8 @@ import './assets/scss/main.scss';
 
 import dataCategories from '@data/categories';
 import Menu from '@modules/menu';
-
-import Categories from '@modules/categories';
-import Cards from '@modules/cards';
+import GoToPage from '@modules/gotopage';
+import ClickMainBlock from '@modules/clickMainBlock';
 
 const menu = new Menu(dataCategories);
 
@@ -17,27 +16,14 @@ mainBlock.classList.add('main_block');
 main.append(mainBlock);
 document.body.append(main);
 
-const params = window
-  .location
-  .search
-  .replace('?', '')
-  .split('&')
-  .reduce(
-    (p, e) => {
-      const a = e.split('=');
-      const accum = p;
-      accum[decodeURIComponent(a[0])] = decodeURIComponent(a[1]);
-      return accum;
-    },
-    {},
-  );
+const goToPage = new GoToPage();
 
-if (params.page === undefined) {
-  const categories = new Categories(dataCategories, mainBlock);
+goToPage.change();
 
-  categories.init();
-} else {
-  const cards = new Cards(params.page, mainBlock);
+window.addEventListener('popstate', () => {
+  goToPage.change();
+});
 
-  cards.init();
-}
+const clickMainBlock = new ClickMainBlock(mainBlock);
+
+clickMainBlock.init();

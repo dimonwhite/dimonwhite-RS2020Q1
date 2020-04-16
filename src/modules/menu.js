@@ -1,3 +1,5 @@
+import GoToPage from '@modules/gotopage';
+
 function importAll(r) {
   return r.keys().map(r);
 }
@@ -37,6 +39,8 @@ export default class Menu {
       e.preventDefault();
       if (e.target.closest('.link')) {
         menu.classList.remove('active');
+        const goToPage = new GoToPage(e.target.closest('.link'));
+        goToPage.go();
       }
     });
 

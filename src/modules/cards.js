@@ -11,6 +11,7 @@ export default class Cards {
       const card = document.createElement('div');
       const cardWrap = document.createElement('div');
       card.classList.add('card');
+      card.dataset.name = item.name;
       cardWrap.classList.add('card_wrapper');
 
       const image = require(`../assets/img/${this.category}/${item.image}`);
@@ -20,26 +21,19 @@ export default class Cards {
           <img class="card_img" src="${image.default}" alt="${item.title}">
           <div class="card_title">
             ${item.title}
-            <svg class="svg_icon rotate">
-              <use xlink:href="sprite.svg#rotate"></use>
-            </svg>
           </div>
         </div>
         <div class="back">
           <img class="card_img" src="${image.default}" alt="${item.title}">
           <div class="card_title">${item.translation}</div>
         </div>
+        <svg class="svg_icon rotate">
+          <use xlink:href="sprite.svg#rotate"></use>
+        </svg>
       `;
-
-      card.querySelector('.rotate').addEventListener('click', Cards.rotateCard);
 
       cardWrap.append(card);
       this.main.append(cardWrap);
     });
-  }
-
-  static rotateCard() {
-    console.log(this.closest('.card'));
-    this.closest('.card').classList.add('rotate');
   }
 }

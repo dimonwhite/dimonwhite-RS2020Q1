@@ -105,3 +105,6 @@ dist
 
 # JetBrrains Settings
 .idea/
+
+# Local Netlify folder
+.netlify
