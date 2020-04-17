@@ -20,11 +20,11 @@ const categories = [
     image: 'animals.jpg',
   },
   {
-    name: 'body-parts',
-    title: 'Body parts',
-    link: '?page=body-parts',
+    name: 'sport',
+    title: 'Sport',
+    link: '?page=sport',
     use: 'category',
-    image: 'body-parts.jpg',
+    image: 'sport.jpg',
   },
   {
     name: 'fruits',
