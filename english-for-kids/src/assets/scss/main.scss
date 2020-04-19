@@ -155,6 +155,12 @@ body {
 }
 
 .game {
+    .stat_btn {
+        background-color: $orange;
+        &:hover {
+            background-color: darken($orange, 20%);
+        }
+    }
     .nav_list {
         background-color: $orange;
         &_item .link {
@@ -627,5 +633,95 @@ body {
         font-weight: 700;
         color: #ff5722;
         text-shadow: 0 0 6px black;
+    }
+}
+
+.btns {
+    width: 100%;
+    padding: 40px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    @include media(700px) {
+        padding: 20px 0;
+    }
+}
+
+.stat_btn {
+    width: 400px;
+    max-width: 40%;
+    height: 50px;
+    color: $lightgrey;
+    font-size: 24px;
+    border-radius: 10px;
+    background-color: $indigo;
+    border: none;
+    cursor: pointer;
+    transition: all 0.5s;
+    &:hover {
+        background-color: darken($indigo, 20%);
+    }
+    @include media(800px) {
+        max-width: 48%;
+        font-size: 20px;
+    }
+    @include media(500px) {
+        width: 100%;
+        max-width: none;
+        margin-bottom: 15px;
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+}
+
+.table {
+    width: 100%;
+    border-spacing: 0;
+    @include media(800px) {
+        font-size: 16px;
+    }
+    @include media(500px) {
+        width: 500px;
+    }
+    &_wrapper {
+        width: 100%;
+        @include media(500px) {
+            overflow-x: scroll;
+        }
+    }
+    thead tr {
+        background-color: $indigo;
+        color: $lightgrey;
+    }
+    th {
+        padding: 14px;
+        font-size: 22px;
+        font-weight: 600;
+        cursor: pointer;
+        @include media(800px) {
+            font-size: 18px;
+        }
+    }
+    td, th {
+        text-align: center;
+        &:first-child {
+            text-align: left;
+        }
+        &:last-child {
+            text-align: right;
+        }
+    }
+    td {
+        padding: 10px 14px;
+    }
+    tbody tr {
+        &:nth-child(2n) {
+            background-color: lightcyan;
+        }
+        &:nth-child(2n - 1) {
+            background-color: lightblue;
+        }
     }
 }
