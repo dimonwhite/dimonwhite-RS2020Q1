@@ -2,6 +2,7 @@ import GoToPage from '@modules/gotopage';
 
 export default class ClickMainBlock {
   constructor(mainBlock) {
+    this.statistics = JSON.parse(localStorage.getItem('statistics'));
     this.main = mainBlock;
     this.audio = new Audio();
   }
@@ -25,6 +26,8 @@ export default class ClickMainBlock {
         const sound = require(`../assets/sound/${card.dataset.name}.mp3`);
         this.audio.src = sound.default;
         this.audio.play();
+        this.statistics[card.dataset.name].train += 1;
+        localStorage.setItem('statistics', JSON.stringify(this.statistics));
       }
     });
   }

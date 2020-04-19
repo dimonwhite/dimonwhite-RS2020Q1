@@ -1,4 +1,5 @@
 import words from '@data/words';
+import categories from '@data/categories';
 
 export default class Cards {
   constructor(category, main) {
@@ -8,7 +9,6 @@ export default class Cards {
 
   init() {
     this.main.classList.remove('main_page');
-    this.main.innerHTML = '<div class="star_wrapper"></div>';
     words[this.category].forEach((item) => {
       const card = document.createElement('div');
       const cardWrap = document.createElement('div');
@@ -37,6 +37,9 @@ export default class Cards {
       cardWrap.append(card);
       this.main.append(cardWrap);
     });
+    const starWrap = document.createElement('div');
+    starWrap.classList.add('star_wrapper');
+    this.main.append(starWrap);
     const gameBtn = document.createElement('button');
     gameBtn.classList.add('game_btn');
     gameBtn.innerText = 'Start';
@@ -46,10 +49,20 @@ export default class Cards {
         <use xlink:href="sprite.svg#repeat"></use>
       </svg>
     `;
+    this.addTitle();
     gameBtn.append(gameBtnSvg);
     const btnWrapper = document.createElement('div');
     btnWrapper.classList.add('btn_wrapper');
     btnWrapper.append(gameBtn);
     this.main.append(btnWrapper);
+  }
+
+  addTitle() {
+    const activeCategory = categories.filter((item) => item.link === `?page=${this.category}`);
+    const { title } = activeCategory[0];
+    const headerTitle = document.createElement('h1');
+    headerTitle.classList.add('page_title');
+    headerTitle.innerHTML = title;
+    this.main.append(headerTitle);
   }
 }

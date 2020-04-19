@@ -1,6 +1,7 @@
 import Categories from '@modules/categories';
 import dataCategories from '@data/categories';
 import Cards from '@modules/cards';
+import Statistics from '@modules/statistics';
 
 const getParams = () => window
   .location
@@ -37,17 +38,19 @@ export default class GoToPage {
   change() {
     this.mainBlock.innerHTML = '';
 
-    const params = getParams();
-
-    if (params.page === undefined) {
-      const categories = new Categories(dataCategories, this.mainBlock);
-
-      categories.init();
-    } else {
-      const cards = new Cards(params.page, this.mainBlock);
-
-      cards.init();
+    this.params = getParams();
+    switch (this.params.page) {
+      case undefined:
+        this.initCategories();
+        break;
+      case 'statistics':
+        this.initStatistics();
+        break;
+      default:
+        this.initCards();
+        break;
     }
+
     let page = window.location.search;
     if (!page) {
       page = '/';
@@ -57,5 +60,20 @@ export default class GoToPage {
       activeLink.classList.remove('active');
     }
     document.querySelector(`.link[href="${page}"]`).classList.add('active');
+  }
+
+  initCategories() {
+    const categories = new Categories(dataCategories, this.mainBlock);
+    categories.init();
+  }
+
+  initCards() {
+    const cards = new Cards(this.params.page, this.mainBlock);
+    cards.init();
+  }
+
+  initStatistics() {
+    const statistics = new Statistics(this.mainBlock);
+    statistics.init();
   }
 }

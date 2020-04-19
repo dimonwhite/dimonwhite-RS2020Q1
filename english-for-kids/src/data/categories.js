@@ -61,6 +61,12 @@ const categories = [
     use: 'category',
     image: 'transport.jpg',
   },
+  {
+    name: 'statistics',
+    title: 'Statistics',
+    link: '?page=statistics',
+    use: 'statistics',
+  },
 ];
 
 export default categories;

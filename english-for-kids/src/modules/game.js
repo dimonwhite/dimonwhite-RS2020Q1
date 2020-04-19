@@ -9,6 +9,7 @@ import wasted from '../assets/img/wasted.png';
 
 export default class Game {
   constructor() {
+    this.statistics = JSON.parse(localStorage.getItem('statistics'));
     this.audio = new Audio();
     this.accuracy = new Audio();
     this.idWord = 0;
@@ -89,6 +90,7 @@ export default class Game {
     const sound = require(`../assets/sound/${this.word}.mp3`);
     this.audio.src = sound.default;
     this.audio.play();
+    this.startGame = true;
   }
 
   replay() {
@@ -101,16 +103,20 @@ export default class Game {
       const { name } = card.dataset;
 
       if (this.word === name) {
+        this.statistics[this.word].success += 1;
         card.classList.add('performed');
         this.accuracy.src = success;
         this.accuracy.play();
         this.choice(true);
+        this.startGame = false;
       } else {
+        this.statistics[this.word].error += 1;
         this.accuracy.src = error;
         this.accuracy.play();
         this.error += 1;
         this.choice(false);
       }
+      localStorage.setItem('statistics', JSON.stringify(this.statistics));
     }
   }
 
@@ -134,7 +140,7 @@ export default class Game {
   }
 
   stop() {
-    this.gameBtn.classList.remove('active');
+    document.querySelector('.game_btn').classList.remove('active');
     this.startGame = false;
     this.starsWrap.innerHTML = '';
     document.querySelectorAll('.card.performed').forEach((item) => {

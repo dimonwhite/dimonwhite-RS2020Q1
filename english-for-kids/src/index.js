@@ -5,6 +5,7 @@ import Menu from '@modules/menu';
 import GoToPage from '@modules/gotopage';
 import ClickMainBlock from '@modules/clickMainBlock';
 import Game from '@modules/game';
+import Statistics from '@modules/statistics';
 
 const menu = new Menu(dataCategories);
 menu.init();
@@ -16,7 +17,11 @@ mainBlock.classList.add('main_block');
 main.append(mainBlock);
 document.body.append(main);
 
-const goToPage = new GoToPage();
+const statistics = new Statistics();
+
+statistics.create();
+
+const goToPage = new GoToPage('');
 
 goToPage.change();
 
