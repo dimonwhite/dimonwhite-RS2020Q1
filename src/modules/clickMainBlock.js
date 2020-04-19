@@ -12,25 +12,29 @@ export default class ClickMainBlock {
         e.preventDefault();
         const goToPage = new GoToPage(e.target.closest('.category_card'));
         goToPage.go();
+        return;
       }
+
       if (e.target.closest('.rotate')) {
         ClickMainBlock.rotateCard(e.target.closest('.rotate'));
+        return;
       }
-      if (e.target.closest('.card_img')) {
+
+      if (e.target.closest('.front .card_img') && !document.body.classList.contains('game')) {
         const card = e.target.closest('.card');
         const sound = require(`../assets/sound/${card.dataset.name}.mp3`);
         this.audio.src = sound.default;
-        this.audio.autoplay = true;
+        this.audio.play();
       }
     });
   }
 
   static rotateCard(rotate) {
     const card = rotate.closest('.card');
-    card.classList.add('rotate');
+    card.classList.add('flip');
 
     const leaveCard = () => {
-      card.classList.remove('rotate');
+      card.classList.remove('flip');
       card.removeEventListener('mouseleave', leaveCard);
     };
 

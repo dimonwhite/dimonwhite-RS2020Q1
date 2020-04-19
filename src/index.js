@@ -4,9 +4,9 @@ import dataCategories from '@data/categories';
 import Menu from '@modules/menu';
 import GoToPage from '@modules/gotopage';
 import ClickMainBlock from '@modules/clickMainBlock';
+import Game from '@modules/game';
 
 const menu = new Menu(dataCategories);
-
 menu.init();
 
 const main = document.createElement('main');
@@ -23,6 +23,9 @@ goToPage.change();
 window.addEventListener('popstate', () => {
   goToPage.change();
 });
+
+const game = new Game();
+game.init();
 
 const clickMainBlock = new ClickMainBlock(mainBlock);
 

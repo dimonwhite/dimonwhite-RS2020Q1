@@ -1,10 +1,11 @@
-@import '~../../../node_modules/normalize.css/normalize.css';
+@import "~../../../node_modules/normalize.css/normalize.css";
 @import "settings/mixins";
 
 $grey: #757575;
 $lightgrey: #c5cae9;
 $indigo: #3f51b5;
 $orange: #ff5722;
+$red: #f44336;
 
 * , *:before, *:after {
     box-sizing: border-box;
@@ -13,7 +14,7 @@ $orange: #ff5722;
 }
 
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: "Roboto", sans-serif;
     font-size: 18px;
     font-weight: 400;
     line-height: 1.4;
@@ -69,7 +70,7 @@ body {
         background-color: $indigo;
         list-style: none;
         transform: translateX(-100%);
-        transition: transform 0.8s;
+        transition: transform 0.8s, background-color 0.5s;
         &_item {
             margin-bottom: 30px;
             .link {
@@ -135,16 +136,137 @@ body {
     }
 }
 
-.game .nav_list {
-    background-color: $orange;
-    &_item .link {
-        &.active, &:hover {
-            color: $indigo;
+.game {
+    .nav_list {
+        background-color: $orange;
+        &_item .link {
+            &.active, &:hover {
+                color: $indigo;
 
-            .svg_icon {
-                fill: $indigo;
+                .svg_icon {
+                    fill: $indigo;
+                }
             }
         }
+    }
+    .category_card {
+        background-color: $orange;
+        &:hover {
+            background-color: darken($orange, 20%);
+        }
+        &_img {
+            border-color: $indigo;
+        }
+    }
+    .card {
+        overflow: hidden;
+        &:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(#fff, 0.3);
+            opacity: 0;
+            transition: opacity 0.4s;
+            z-index: 2;
+        }
+        &.performed {
+            &:before {
+                opacity: 1;
+            }
+        }
+        &_title {
+            height: 0;
+        }
+        .rotate {
+            right: 0;
+            bottom: 0;
+            height: 0;
+            width: 0;
+            opacity: 0;
+            pointer-events: none;
+        }
+        &_img {
+            height: 100%;
+        }
+    }
+    &_btn {
+        position: relative;
+        display: block;
+        height: 0;
+        width: 0;
+        max-width: 100%;
+        margin: 0 auto;
+        color: $lightgrey;
+        font-size: 26px;
+        font-weight: 500;
+        text-transform: uppercase;
+        border: none;
+        border-radius: 10px;
+        background-color: $orange;
+        cursor: pointer;
+        overflow: hidden;
+        transition: all 0.2s, background-color 0.5s;
+        &:hover {
+            background-color: darken($orange, 20);
+        }
+        &:focus {
+            outline: 0;
+        }
+        .svg_icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            opacity: 0;
+            fill: $lightgrey;
+            transform: translate(-50%, -50%);
+            transition: all 0.4s;
+        }
+    }
+    .game_btn {
+        display: block;
+        width: 500px;
+        height: 70px;
+        &.active {
+            width: 70px;
+            font-size: 0;
+            color: transparent;
+            .svg_icon {
+                width: 50px;
+                height: 50px;
+                opacity: 1;
+            }
+        }
+    }
+}
+
+.btn_wrapper {
+    width: 100%;
+    padding-top: 20px;
+}
+
+.star_wrapper {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    height: 40px;
+    margin-bottom: 20px;
+}
+
+.star {
+    margin-right: 20px;
+    &:last-child {
+        margin-right: 0;
+    }
+    .svg_icon {
+        width: 40px;
+        height: 40px;
+        display: block;
+        fill: $orange;
     }
 }
 
@@ -154,9 +276,11 @@ body {
         display: flex;
         flex-wrap: wrap;
         justify-content: space-between;
-        padding-top: 80px;
-        padding-bottom: 50px;
+        padding: 20px 0;
         perspective: 2500px;
+        &.main_page {
+            padding-top: 80px;
+        }
     }
 }
 
@@ -181,9 +305,12 @@ body {
         &_img {
             display: inline-block;
             margin-bottom: 20px;
-            width: 80%;
+            width: 200px;
+            height: 200px;
+            max-width: 90%;
             border-radius: 50%;
             border: 5px solid $orange;
+            transition: all 0.5s;
         }
     }
 }
@@ -202,7 +329,7 @@ body {
     &:hover {
         box-shadow: 0 10px 20px rgba(0,0,0,.4);
     }
-    &.rotate {
+    &.flip {
         transform: rotateY(180deg);
     }
     &_wrapper {
@@ -228,13 +355,20 @@ body {
         height: 200px;
         object-fit: cover;
         border-radius: 15px 15px 0 0;
+        transition: height 0.5s;
     }
     &_title {
+        position: absolute;
+        bottom: 0;
+        left: 0;
         display: flex;
         align-items: center;
         justify-content: center;
+        width: 100%;
         height: 60px;
+        overflow: hidden;
         border-top: 1px solid rgba($grey, 0.2);
+        transition: height 0.5s;
     }
     .rotate {
         position: absolute;
@@ -249,5 +383,123 @@ body {
             fill: $indigo;
             transform: rotate(45deg);
         }
+    }
+}
+
+.switch {
+    position: relative;
+    width: 130px;
+    height: 46px;
+    padding: 3px;
+    background-image: linear-gradient(180deg,#eee,#fff 25px);
+    border-radius: 5px;
+    box-shadow: inset 0 -1px #fff, inset 0 1px 1px rgba(0,0,0,.05);
+    cursor: pointer;
+    &_input {
+        position: absolute;
+        left: 5px;
+        top: 5px;
+        width: 1px;
+        height: 1px;
+        opacity: 0;
+        &:checked {
+            & ~ .switch_label {
+                background-color: $indigo;
+                &:before {
+                    opacity: 1;
+                }
+                &:after {
+                    opacity: 0;
+                }
+            }
+            & ~ .switch_handle {
+                left: 90px;
+            }
+        }
+    }
+    &_label {
+        position: relative;
+        height: 40px;
+        font-size: 18px;
+        line-height: 40px;
+        color: $lightgrey;
+        text-transform: uppercase;
+        background-color: $orange;
+        border-radius: inherit;
+        box-shadow: inset 0 1px 2px rgba(0,0,0,.12), inset 0 0 2px rgba(0,0,0,.15);
+        transition: all 0.3s;
+        &:before, &:after {
+            position: absolute;
+            top: 0;
+            text-shadow: 0 1px rgba(0,0,0,.2);
+            transition: inherit;
+        }
+        &:before {
+            content: "Train";
+            left: 15px;
+            opacity: 0;
+        }
+        &:after {
+            content: "Game";
+            right: 15px;
+        }
+    }
+    &_handle {
+        position: absolute;
+        top: 6px;
+        left: 6px;
+        width: 34px;
+        height: 34px;
+        border-radius: 5px;
+        box-shadow: 1px 1px 5px rgba(0,0,0,.2);
+        background-image: linear-gradient(180deg,#fff 40%,#f0f0f0);
+        transition: left 0.4s;
+        &:before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin: -6px 0 0 -6px;
+            width: 12px;
+            height: 12px;
+            border-radius: 6px;
+            box-shadow: inset 0 1px rgba(0,0,0,.02);
+            background-image: linear-gradient(180deg,#eee,#fff);
+        }
+    }
+}
+
+.popup {
+    text-align: center;
+    &_wrap {
+        position: fixed;
+        top: 0;
+        left: -9999px;
+        z-index: 50;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: rgba(#000, 0.5);
+        opacity: 0;
+        transition: opacity 0.5s;
+        &.active {
+            left: 0;
+            opacity: 1;
+        }
+    }
+    .img {
+        width: 400px;
+        max-width: 90%;
+        &.wasted {
+            margin-bottom: 40px;
+        }
+    }
+    .text {
+        font-size: 60px;
+        font-weight: 700;
+        color: #ff5722;
+        text-shadow: 0 0 6px black;
     }
 }

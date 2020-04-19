@@ -249,6 +249,156 @@ const words = {
       translation: 'Юбка',
     },
   ],
+  food: [
+    {
+      name: 'bread',
+      title: 'Bread',
+      image: 'bread.jpg',
+      translation: 'Хлеб',
+    },
+    {
+      name: 'cake',
+      title: 'Cake',
+      image: 'cake.jpg',
+      translation: 'Торт',
+    },
+    {
+      name: 'cheese',
+      title: 'Cheese',
+      image: 'cheese.jpg',
+      translation: 'Сыр',
+    },
+    {
+      name: 'chocolate',
+      title: 'Chocolate',
+      image: 'chocolate.jpg',
+      translation: 'Шоколад',
+    },
+    {
+      name: 'hamburger',
+      title: 'Hamburger',
+      image: 'hamburger.jpg',
+      translation: 'Гамбургер',
+    },
+    {
+      name: 'icecream',
+      title: 'Ice cream',
+      image: 'icecream.jpg',
+      translation: 'Мороженое',
+    },
+    {
+      name: 'meat',
+      title: 'Meat',
+      image: 'meat.jpg',
+      translation: 'Мясо',
+    },
+    {
+      name: 'pizza',
+      title: 'Pizza',
+      image: 'pizza.jpg',
+      translation: 'Пицца',
+    },
+  ],
+  job: [
+    {
+      name: 'cook',
+      title: 'Cook',
+      image: 'cook.jpg',
+      translation: 'Повар',
+    },
+    {
+      name: 'cosmonaut',
+      title: 'Cosmonaut',
+      image: 'cosmonaut.jpg',
+      translation: 'Космонавт',
+    },
+    {
+      name: 'dentist',
+      title: 'Dentist',
+      image: 'dentist.jpg',
+      translation: 'Стоматолог',
+    },
+    {
+      name: 'doctor',
+      title: 'Doctor',
+      image: 'doctor.jpg',
+      translation: 'Врач',
+    },
+    {
+      name: 'fireman',
+      title: 'Fireman',
+      image: 'fireman.jpg',
+      translation: 'Пожарный',
+    },
+    {
+      name: 'judge',
+      title: 'Judge',
+      image: 'judge.jpg',
+      translation: 'Судья',
+    },
+    {
+      name: 'policeman',
+      title: 'Policeman',
+      image: 'policeman.jpg',
+      translation: 'Полицейский',
+    },
+    {
+      name: 'teacher',
+      title: 'Teacher',
+      image: 'teacher.jpg',
+      translation: 'Учитель',
+    },
+  ],
+  transport: [
+    {
+      name: 'aircraft',
+      title: 'Aircraft',
+      image: 'aircraft.jpg',
+      translation: 'Самолет',
+    },
+    {
+      name: 'bike',
+      title: 'Bike',
+      image: 'bike.jpg',
+      translation: 'Велосипед',
+    },
+    {
+      name: 'bus',
+      title: 'Bus',
+      image: 'bus.jpg',
+      translation: 'Автобус',
+    },
+    {
+      name: 'car',
+      title: 'Car',
+      image: 'car.jpg',
+      translation: 'Машина',
+    },
+    {
+      name: 'motorcycle',
+      title: 'Motorcycle',
+      image: 'motorcycle.jpg',
+      translation: 'Мотоцикл',
+    },
+    {
+      name: 'tractor',
+      title: 'Tractor',
+      image: 'tractor.jpg',
+      translation: 'Трактор',
+    },
+    {
+      name: 'train',
+      title: 'Train',
+      image: 'train.jpg',
+      translation: 'Поезд',
+    },
+    {
+      name: 'truck',
+      title: 'Truck',
+      image: 'truck.jpg',
+      translation: 'Грузовик',
+    },
+  ],
 };
 
 export default words;

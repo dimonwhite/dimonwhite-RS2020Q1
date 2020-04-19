@@ -7,6 +7,8 @@ export default class Cards {
   }
 
   init() {
+    this.main.classList.remove('main_page');
+    this.main.innerHTML = '<div class="star_wrapper"></div>';
     words[this.category].forEach((item) => {
       const card = document.createElement('div');
       const cardWrap = document.createElement('div');
@@ -35,5 +37,19 @@ export default class Cards {
       cardWrap.append(card);
       this.main.append(cardWrap);
     });
+    const gameBtn = document.createElement('button');
+    gameBtn.classList.add('game_btn');
+    gameBtn.innerText = 'Start';
+    const gameBtnSvg = document.createElement('div');
+    gameBtnSvg.innerHTML = `
+      <svg class="svg_icon">
+        <use xlink:href="sprite.svg#repeat"></use>
+      </svg>
+    `;
+    gameBtn.append(gameBtnSvg);
+    const btnWrapper = document.createElement('div');
+    btnWrapper.classList.add('btn_wrapper');
+    btnWrapper.append(gameBtn);
+    this.main.append(btnWrapper);
   }
 }

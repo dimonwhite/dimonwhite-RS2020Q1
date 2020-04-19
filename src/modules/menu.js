@@ -38,8 +38,9 @@ export default class Menu {
     menu.addEventListener('click', (e) => {
       e.preventDefault();
       if (e.target.closest('.link')) {
+        const link = e.target.closest('.link');
         menu.classList.remove('active');
-        const goToPage = new GoToPage(e.target.closest('.link'));
+        const goToPage = new GoToPage(link);
         goToPage.go();
       }
     });

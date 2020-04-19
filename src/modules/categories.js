@@ -5,6 +5,7 @@ export default class Categories {
   }
 
   init() {
+    this.main.classList.add('main_page');
     this.categories.forEach((item) => {
       if (item.use === 'category') {
         const card = document.createElement('a');
