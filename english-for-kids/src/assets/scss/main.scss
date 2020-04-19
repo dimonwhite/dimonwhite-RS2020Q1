@@ -91,6 +91,9 @@ body {
         }
         &_item {
             margin-bottom: 30px;
+            @include media(600px) {
+                margin-bottom: 15px;
+            }
             .link {
                 display: flex;
                 align-items: center;
@@ -99,6 +102,9 @@ body {
                 color: $lightgrey;
                 text-decoration: none;
                 transition: all 0.6s;
+                @include media(600px) {
+                    font-size: 20px;
+                }
                 &.active, &:hover {
                     color: $orange;
                     .svg_icon {
@@ -111,6 +117,10 @@ body {
                     fill: $lightgrey;
                     margin-right: 14px;
                     transition: all 0.6s;
+                    @include media(600px) {
+                        width: 22px;
+                        height: 22px;
+                    }
                 }
             }
         }
@@ -321,6 +331,15 @@ body {
         justify-content: center;
         padding: 20px 0;
         perspective: 2500px;
+        @include media(1100px) {
+            perspective: 4000px;
+        }
+        @include media(800px) {
+            perspective: 8000px;
+        }
+        @include media(550px) {
+            perspective: 12000px;
+        }
         @include media(700px) {
             padding: 15px 0 40px;
         }

@@ -16,7 +16,7 @@ export default class Cards {
       card.dataset.name = item.name;
       cardWrap.classList.add('card_wrapper');
 
-      const image = require(`../assets/img/${this.category}/${item.image}`);
+      const image = require(`../assets/img/${item.image}`);
 
       card.innerHTML = `
         <div class="front">

@@ -1,4 +1,5 @@
 import words from '@data/words';
+import Cards from './cards';
 
 export default class Statistics {
   constructor(main) {
@@ -9,12 +10,18 @@ export default class Statistics {
   }
 
   init() {
+    this.main.classList.remove('main_page');
     this.addBtns();
     this.createTable();
     this.outputStatistics();
+    this.addTitle();
 
     this.resetBtn.addEventListener('click', () => {
       this.reset();
+    });
+
+    this.gameDifficult.addEventListener('click', () => {
+      this.repeatDifficult();
     });
 
     this.table.querySelector('thead').addEventListener('click', (e) => {
@@ -22,6 +29,7 @@ export default class Statistics {
         const th = e.target.closest('th');
         this.sort(th.dataset.sort, th.dataset.desc);
         th.dataset.desc = th.dataset.desc !== 'true';
+        this.outputStatistics();
       }
     });
   }
@@ -74,6 +82,8 @@ export default class Statistics {
             train: 0,
             success: 0,
             error: 0,
+            name: item.name,
+            image: item.image,
           };
         });
       });
@@ -115,6 +125,35 @@ export default class Statistics {
       templateStatistics[item] = this.statistics[item];
     });
     this.statistics = templateStatistics;
-    this.outputStatistics();
+  }
+
+  repeatDifficult() {
+    words.statistics = [];
+
+    this.sort('error', 'false');
+
+    Object.keys(this.statistics).forEach((key, i) => {
+      const item = this.statistics[key];
+      if (item.error > 0 && i < 8) {
+        words.statistics.push({
+          name: item.name,
+          title: item.title,
+          image: item.image,
+          translation: item.translation,
+        });
+      }
+    });
+    if (words.statistics.length > 0) {
+      this.main.innerHTML = '';
+      const cards = new Cards('statistics', this.main);
+      cards.init();
+    }
+  }
+
+  addTitle() {
+    const headerTitle = document.createElement('h1');
+    headerTitle.classList.add('page_title');
+    headerTitle.innerHTML = 'Statistics';
+    this.main.append(headerTitle);
   }
 }

@@ -81,7 +81,7 @@ export default class Game {
   }
 
   step() {
-    if (this.idWord === 8) {
+    if (this.idWord === this.words.length) {
       this.result();
       this.stop();
       return;
