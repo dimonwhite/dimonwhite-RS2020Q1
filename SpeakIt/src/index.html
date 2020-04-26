@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>English For Kids</title>
+    <link rel="icon" href="./favicon.ico" type="image/ico">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="preload hide">
+        <div class="title">SPEAKIT</div>
+        <div class="text">Click on the words to hear them sound.<br>Click on the button and speak the words into the microphone.</div>
+
+        <button class="btn">Start</button>
+    </div>
+
+    <main class="main container">
+        <header class="header">
+            <div class="level_wrap">
+                <div class="level_item active" data-level="0"></div>
+                <div class="level_item" data-level="1"></div>
+                <div class="level_item" data-level="2"></div>
+                <div class="level_item" data-level="3"></div>
+                <div class="level_item" data-level="4"></div>
+                <div class="level_item" data-level="5"></div>
+            </div>
+            <div class="score"></div>
+        </header>
+
+        <section class="game">
+            <img src="./assets/img/blank.jpg" alt="" class="game_img">
+            <div class="translation"></div>
+            <div class="game_word"></div>
+
+            <div class="word_list"></div>
+
+            <div class="game_btns">
+                <button class="btn new_game">New game</button>
+                <button class="btn start">Start</button>
+                <button class="btn result">Result</button>
+            </div>
+        </section>
+    </main>
+
+    <div class="popup">
+        <div class="popup_block">
+            <div class="title">Ошибок <span class="errors">10</span></div>
+            <div class="errors_block">
+
+            </div>
+            <div class="title">Знаю <span class="success">10</span></div>
+            <div class="success_block">
+
+            </div>
+            <div class="popup_btns">
+                <button class="btn close_popup">Close</button>
+                <button class="btn new_game_popup">New game</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
