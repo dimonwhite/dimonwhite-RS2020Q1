@@ -1,6 +1,6 @@
 import Swiper from 'swiper';
 import { yandexTranslate, OMDb } from '../constants';
-import noPoster from '../assets/img/noposter.jpg';
+import noPoster from '../assets/img/noposter.png';
 import Movie from './movie';
 
 export default class Search {
@@ -10,10 +10,10 @@ export default class Search {
     this.movies = [];
     this.loader = document.querySelector('.loader');
     this.search = '123';
+    this.prompt = document.querySelector('.search_prompt');
   }
 
   init() {
-    console.log(yandexTranslate);
     this.moviesPage();
     this.initSwiper();
     document.querySelector('.search_block')
@@ -29,15 +29,19 @@ export default class Search {
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
-        this.totalResults = data.totalResults;
-        Promise.all(
-          data.Search
-            .reduce((arrayPromises, dataMovie) => this.createMovie(arrayPromises, dataMovie), []),
-        )
-          .then(() => {
-            this.swiper.appendSlide(this.movies);
-            this.loader.classList.remove('active');
-          });
+        if (data.Response === 'True') {
+          this.totalResults = data.totalResults;
+          Promise.all(
+            data.Search
+              .reduce((arrayPromises, dataMovie) => this.createMovie(arrayPromises, dataMovie), []),
+          )
+            .then(() => {
+              this.swiper.appendSlide(this.movies);
+              this.loader.classList.remove('active');
+            });
+        } else {
+          this.errorOutput(data.Error);
+        }
       });
   }
 
@@ -62,13 +66,32 @@ export default class Search {
 
   submitForm(e) {
     e.preventDefault();
-    console.log(e);
+    this.prompt.innerText = '';
     const form = e.target;
     const valueSearch = form.querySelector('.search_input').value;
     this.swiper.removeAllSlides();
     this.page = 1;
     this.search = valueSearch;
-    this.moviesPage();
+    if (this.isCyrillic()) {
+      this.translate();
+    } else {
+      this.moviesPage();
+    }
+  }
+
+  isCyrillic() {
+    return /[а-я]/i.test(this.search);
+  }
+
+  translate() {
+    fetch(`${yandexTranslate}&text=${this.search.trim()}`)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        this.search = data.text[data.text.length - 1];
+        this.prompt.innerText = `Showing results for "${this.search}"`;
+        this.moviesPage();
+      });
   }
 
   initSwiper() {
@@ -104,9 +127,17 @@ export default class Search {
 
   nextPage() {
     console.log(this.totalResults, this.totalResults / this.page);
-    if (this.swiper.slides.length && this.totalResults / this.page > 10) {
+    if (this.swiper.slides.length && this.totalResults / (this.page + 1) > 10) {
       this.page += 1;
       this.moviesPage();
+    }
+  }
+
+  errorOutput(error) {
+    if (error === 'Movie not found!') {
+      this.prompt.innerText = `No results for "${this.search}"`;
+    } else {
+      this.prompt.innerText = error;
     }
   }
 }
