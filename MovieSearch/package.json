@@ -1,5 +1,5 @@
 {
-  "name": "SpeakIt",
+  "name": "MovieSearch",
   "version": "1.0.0",
   "description": "",
   "private": true,
@@ -44,6 +44,7 @@
   },
   "dependencies": {
     "@babel/polyfill": "^7.8.7",
-    "normalize.css": "^8.0.1"
+    "normalize.css": "^8.0.1",
+    "swiper": "^5.3.8"
   }
 }

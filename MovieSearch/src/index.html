@@ -10,6 +10,53 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    
+    <header class="header container">
+        <h1 class="header_title">Movie Search</h1>
+        <div class="loader cssload-container">
+            <div class="cssload-arc">
+                <div class="cssload-arc-cube"></div>
+            </div>
+        </div>
+    </header>
+
+    <main class="main container">
+        <form method="POST" action="/" class="search_block" autocomplete="off">
+            <label class="search_label">
+                <input type="search" class="search_input" autofocus placeholder="Search Movie">
+                <svg class="search_svg">
+                    <use xlink:href="sprite.svg#search"></use>
+                </svg>
+                <button type="reset" class="clear_btn"></button>
+                <button type="button" class="keyboard_btn">
+                    <svg class="svg_icon">
+                        <use xlink:href="sprite.svg#keyboard"></use>
+                    </svg>
+                </button>
+            </label>
+            <button class="btn">Search</button>
+            <div class="keyboard_wrap"></div>
+        </form>
+        <div class="search_prompt"></div>
+
+        <div class="movies">
+            <div class="swiper-container">
+                <div class="swiper-wrapper"></div>
+            </div>
+            <div class="swiper-nav">
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer container">
+        <div class="text">RSSchool 2020Q1</div>
+        <a href="//github.com/dimonwhite" target="_blank" class="link">
+            <svg class="svg_icon">
+                <use xlink:href="sprite.svg#github"></use>
+            </svg>
+            Github
+        </a>
+    </footer>
 </body>
 </html>
