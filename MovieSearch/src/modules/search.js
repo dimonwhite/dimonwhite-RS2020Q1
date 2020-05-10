@@ -57,14 +57,16 @@ export default class Search {
         []),
     )
       .then(() => {
-        if (!firstRequest
-            && this.page === 1
-            && this.swiper.slides.length > dataSearch.length) {
+        if (this.isRemoveSlides(firstRequest, dataSearch.length)) {
           this.removeSlides(dataSearch.length);
         }
         this.appendSlides(this.movies);
         this.loader.classList.remove('active');
       });
+  }
+
+  isRemoveSlides(firstRequest, dataSearchLength) {
+    return !firstRequest && this.page === 1 && this.swiper.slides.length > dataSearchLength;
   }
 
   appendSlides(movies) {
@@ -103,6 +105,7 @@ export default class Search {
         const img = new Image();
         img.src = dataMovie.Poster !== 'N/A' ? dataMovie.Poster : noPoster;
         img.onload = () => resolve();
+        img.onerror = () => resolve();
       }),
     );
     return arrayPromises;

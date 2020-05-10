@@ -14,7 +14,7 @@ export default class Favorites {
   init() {
     const moviesBlock = document.querySelector('.movies');
     moviesBlock.addEventListener('click', (e) => {
-      this.clickFavorites(e);
+      this.clickFavoriteBtn(e);
     });
     document.querySelector('.link.favorites_link')
       .addEventListener('click', (e) => {
@@ -43,16 +43,16 @@ export default class Favorites {
     }
   }
 
-  clickFavorites(e) {
-    const favoritesBtn = e.target.closest('.favorites');
-    if (favoritesBtn) {
-      this.toggleFavorites(favoritesBtn);
+  clickFavoriteBtn(e) {
+    const favoriteBtn = e.target.closest('.favorites');
+    if (favoriteBtn) {
+      this.changeFavorite(favoriteBtn);
     }
   }
 
-  toggleFavorites(favoritesBtn) {
-    const { id } = favoritesBtn.dataset;
-    favoritesBtn.classList.toggle('active');
+  changeFavorite(favoriteBtn) {
+    const { id } = favoriteBtn.dataset;
+    favoriteBtn.classList.toggle('active');
     if (this.favorites[id]) {
       delete this.favorites[id];
     } else {
