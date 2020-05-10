@@ -10,7 +10,7 @@ export default class Search {
     this.totalResults = 0;
     this.movies = [];
     this.loader = document.querySelector('.loader');
-    this.search = '123';
+    this.search = 'transformers';
     this.prompt = document.querySelector('.search_prompt');
     this.moviesBlock = document.querySelector('.movies');
     this.residue = 0;
