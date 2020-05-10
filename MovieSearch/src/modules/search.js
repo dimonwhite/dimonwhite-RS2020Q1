@@ -43,7 +43,6 @@ export default class Search {
   }
 
   loadDataMovie(dataSearch, dataTotalResults, search, firstRequest) {
-    this.prompt.innerText = '';
     this.search = search;
     this.residue = dataTotalResults;
     this.totalResults = dataTotalResults;
@@ -113,6 +112,7 @@ export default class Search {
 
   submitForm(e) {
     e.preventDefault();
+    this.prompt.innerText = '';
     this.moviesBlock.classList.remove('favorites');
     const form = e.target;
     const valueSearch = form.querySelector('.search_input').value;
