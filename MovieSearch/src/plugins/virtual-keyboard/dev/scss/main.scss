@@ -1,0 +1,87 @@
+.keyboard {
+    margin-bottom: 20px;
+    padding: 10px;
+    font-weight: 500;
+    border: 2px solid #212121;
+    border-radius: 8px;
+    background-color: #424242;
+    &_row {
+        display: flex;
+        justify-content: space-between;
+        &:last-child {
+            .keyboard_item {
+                margin-bottom: 0;
+            }
+        }
+    }
+    &_item {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 50px;
+        height: 50px;
+        margin-bottom: 10px;
+        border-radius: 6px;
+        background-color: #bdbdbd;
+        cursor: pointer;
+        transition: all 0.4s;
+        &.general {
+            background-color: #ff7676;
+        }
+        &.backspace, &.capsLock, &.ShiftLeft {
+            width: 135px;
+        }
+        &.del, &.tab {
+            width: 60px;
+        }
+        &.enter, &.ShiftRight {
+            width: 115px;
+        }
+        &.space {
+            width: 460px;
+        }
+        &.language {
+            font-size: 12px;
+        }
+        &:hover {
+            background-color: #4fc3f7;
+        }
+        &.active {
+            background-color: #4fc3f7;
+            border-radius: 50px;
+            box-shadow: 0 0 30px rgba(#4fc3f7, 0.6);
+        }
+        span {
+            display: none;
+            &.general, &.arrow {
+                display: block;
+            }
+        }
+    }
+    &.ru {
+        .ru {
+            display: block;
+        }
+        &.up {
+            .ru {
+                display: none;
+            }
+            .ruUp {
+                display: block;
+            }
+        }
+    }
+    &.en {
+        .en {
+            display: block;
+        }
+        &.up {
+            .en {
+                display: none;
+            }
+            .enUp {
+                display: block;
+            }
+        }
+    }
+}

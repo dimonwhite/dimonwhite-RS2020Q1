@@ -1,7 +1,7 @@
 import './assets/scss/main.scss';
 import Search from '@modules/search';
 import Swiper from 'swiper';
-import Keyboard from './plugins/virtual-keyboard-module/assets/js/main';
+import Keyboard from './plugins/virtual-keyboard/assets/js/main';
 import Favorites from './modules/favorites';
 
 function importAll(r) {
