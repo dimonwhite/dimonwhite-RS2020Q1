@@ -12,13 +12,16 @@ export default class Search {
     this.loader = document.querySelector('.loader');
     this.search = '123';
     this.prompt = document.querySelector('.search_prompt');
+    this.moviesBlock = document.querySelector('.movies');
     this.residue = 0;
   }
 
   init() {
-    this.moviesPage(this.search, true);
+    this.loadMoviesPage(this.search, true);
     this.swiper.on('reachEnd', () => {
-      this.nextPage();
+      if (!this.moviesBlock.classList.contains('favorites')) {
+        this.nextPage();
+      }
     });
     document.querySelector('.search_block')
       .addEventListener('submit', (e) => {
@@ -26,50 +29,55 @@ export default class Search {
       });
   }
 
-  moviesPage(search, firstRequest) {
+  loadMoviesPage(search, firstRequest) {
     this.loader.classList.add('active');
     this.movies = [];
     fetchJSON(`${OMDb}&page=${this.page}&s=${search}`)
       .then((data) => {
-        console.log(data);
         if (data.Response === 'True') {
-          this.residue = data.totalResults;
-          this.search = search;
-          this.totalResults = data.totalResults;
-          if (!firstRequest && this.page === 1) {
-            this.swiper.slideTo(0, 400);
-          }
-          Promise.all(
-            data.Search
-              .reduce((arrayPromises, dataMovie, i) => this
-                .createMovie(arrayPromises, dataMovie, i),
-              []),
-          )
-            .then(() => {
-              if (!firstRequest
-                  && this.page === 1
-                  && this.swiper.slides.length > data.Search.length) {
-                this.removeSlides(data.Search.length);
-              }
-              this.appendSlides(this.movies);
-              this.loader.classList.remove('active');
-            });
+          this.loadDataMovie(data.Search, data.totalResults, search, firstRequest);
         } else {
           this.errorOutput(data.Error, search);
-          this.loader.classList.remove('active');
         }
+      });
+  }
+
+  loadDataMovie(dataSearch, dataTotalResults, search, firstRequest) {
+    this.prompt.innerText = '';
+    this.search = search;
+    this.residue = dataTotalResults;
+    this.totalResults = dataTotalResults;
+    if (!firstRequest && this.page === 1) {
+      this.swiper.slideTo(0, 400);
+    }
+    Promise.all(
+      dataSearch
+        .reduce((arrayPromises, dataMovie, i) => this
+          .createMovie(arrayPromises, dataMovie, i),
+        []),
+    )
+      .then(() => {
+        if (!firstRequest
+            && this.page === 1
+            && this.swiper.slides.length > dataSearch.length) {
+          this.removeSlides(dataSearch.length);
+        }
+        this.appendSlides(this.movies);
+        this.loader.classList.remove('active');
       });
   }
 
   appendSlides(movies) {
     const arrayMovies = [];
-    movies.forEach((item, i) => {
-      if (typeof item === 'string') {
-        arrayMovies.push(item);
-      } else {
-        item.editHTML(this.swiper.slides[i]);
-      }
-    });
+    movies
+      .sort((item) => (typeof item === 'string' ? 1 : -1))
+      .forEach((item, i) => {
+        if (typeof item === 'string') {
+          arrayMovies.push(item);
+        } else {
+          item.editHTML(this.swiper.slides[i]);
+        }
+      });
     this.swiper.appendSlide(arrayMovies);
   }
 
@@ -84,9 +92,6 @@ export default class Search {
   createMovie(arrayPromises, dataMovie, i) {
     const movie = new Movie(
       dataMovie.imdbID,
-      dataMovie.Title,
-      dataMovie.Poster,
-      dataMovie.Year,
       this.movies,
     );
     const moviePromise = this.swiper.slides[i] && this.page === 1
@@ -105,14 +110,14 @@ export default class Search {
 
   submitForm(e) {
     e.preventDefault();
-    this.prompt.innerText = '';
+    this.moviesBlock.classList.remove('favorites');
     const form = e.target;
     const valueSearch = form.querySelector('.search_input').value;
     this.page = 1;
     if (Search.isCyrillic(valueSearch)) {
       this.translate(valueSearch);
     } else {
-      this.moviesPage(valueSearch);
+      this.loadMoviesPage(valueSearch);
     }
   }
 
@@ -124,17 +129,16 @@ export default class Search {
     fetch(`${yandexTranslate}&text=${valueSearch.trim()}`)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         const valueSearchTranslate = data.text[data.text.length - 1];
         this.prompt.innerText = `Showing results for "${valueSearchTranslate}"`;
-        this.moviesPage(valueSearchTranslate);
+        this.loadMoviesPage(valueSearchTranslate);
       });
   }
 
   nextPage() {
     if (this.residue > this.swiper.slides.length) {
       this.page += 1;
-      this.moviesPage(this.search);
+      this.loadMoviesPage(this.search);
     }
   }
 
@@ -144,5 +148,6 @@ export default class Search {
     } else {
       this.prompt.innerText = error;
     }
+    this.loader.classList.remove('active');
   }
 }

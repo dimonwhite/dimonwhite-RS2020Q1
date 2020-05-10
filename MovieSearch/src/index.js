@@ -35,8 +35,6 @@ const swiper = new Swiper('.swiper-container', {
     },
   },
 });
-const favorites = new Favorites(swiper);
-favorites.init();
 
 const keyboardBtn = document.querySelector('.keyboard_btn');
 const searchInput = document.querySelector('.search_input');
@@ -59,5 +57,7 @@ function keyboardSwitchState() {
 keyboardBtn.addEventListener('click', keyboardSwitchState);
 
 const search = new Search(swiper);
-
 search.init();
+
+const favorites = new Favorites(swiper);
+favorites.init();

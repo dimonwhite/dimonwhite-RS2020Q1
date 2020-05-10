@@ -3,10 +3,7 @@ import noPoster from '../assets/img/noposter.png';
 import fetchJSON from '../utils';
 
 export default class Movie {
-  constructor(imdbID, title, img, year, movies) {
-    this.title = title;
-    this.img = img;
-    this.year = year;
+  constructor(imdbID, movies) {
     this.imdbID = imdbID;
     this.movies = movies;
     this.favorites = localStorage.getItem('favorites')
@@ -14,11 +11,17 @@ export default class Movie {
       : {};
   }
 
+  constructorMovie(data) {
+    this.title = data.Title;
+    this.img = data.Poster;
+    this.year = data.Year;
+    this.rating = data.imdbRating;
+  }
+
   create() {
     return fetchJSON(`${OMDb}&i=${this.imdbID}`)
       .then((data) => {
-        console.log(data);
-        this.rating = data.imdbRating;
+        this.constructorMovie(data);
         this.movies.push(this.createHTML());
       });
   }
@@ -64,7 +67,7 @@ export default class Movie {
   edit() {
     return fetchJSON(`${OMDb}&i=${this.imdbID}`)
       .then((data) => {
-        this.rating = data.imdbRating;
+        this.constructorMovie(data);
         this.movies.push(this);
       });
   }
