@@ -1,60 +1,99 @@
-import Swiper from 'swiper';
 import { yandexTranslate, OMDb } from '../constants';
 import noPoster from '../assets/img/noposter.png';
 import Movie from './movie';
+import fetchJSON from '../utils';
 
 export default class Search {
-  constructor() {
+  constructor(swiper) {
+    this.swiper = swiper;
     this.page = 1;
     this.totalResults = 0;
     this.movies = [];
     this.loader = document.querySelector('.loader');
     this.search = '123';
     this.prompt = document.querySelector('.search_prompt');
+    this.residue = 0;
   }
 
   init() {
-    this.moviesPage();
-    this.initSwiper();
+    this.moviesPage(this.search, true);
+    this.swiper.on('reachEnd', () => {
+      this.nextPage();
+    });
     document.querySelector('.search_block')
       .addEventListener('submit', (e) => {
         this.submitForm(e);
       });
   }
 
-  moviesPage() {
+  moviesPage(search, firstRequest) {
     this.loader.classList.add('active');
     this.movies = [];
-    fetch(`${OMDb}&page=${this.page}&s=${this.search}`)
-      .then((response) => response.json())
+    fetchJSON(`${OMDb}&page=${this.page}&s=${search}`)
       .then((data) => {
         console.log(data);
         if (data.Response === 'True') {
+          this.residue = data.totalResults;
+          this.search = search;
           this.totalResults = data.totalResults;
+          if (!firstRequest && this.page === 1) {
+            this.swiper.slideTo(0, 400);
+          }
           Promise.all(
             data.Search
-              .reduce((arrayPromises, dataMovie) => this.createMovie(arrayPromises, dataMovie), []),
+              .reduce((arrayPromises, dataMovie, i) => this
+                .createMovie(arrayPromises, dataMovie, i),
+              []),
           )
             .then(() => {
-              this.swiper.appendSlide(this.movies);
+              if (!firstRequest
+                  && this.page === 1
+                  && this.swiper.slides.length > data.Search.length) {
+                this.removeSlides(data.Search.length);
+              }
+              this.appendSlides(this.movies);
               this.loader.classList.remove('active');
             });
         } else {
-          this.errorOutput(data.Error);
+          this.errorOutput(data.Error, search);
+          this.loader.classList.remove('active');
         }
       });
   }
 
-  createMovie(arrayPromises, dataMovie) {
+  appendSlides(movies) {
+    const arrayMovies = [];
+    movies.forEach((item, i) => {
+      if (typeof item === 'string') {
+        arrayMovies.push(item);
+      } else {
+        item.editHTML(this.swiper.slides[i]);
+      }
+    });
+    this.swiper.appendSlide(arrayMovies);
+  }
+
+  removeSlides(movieLength) {
+    const positionsRemoveSlide = [];
+    for (let i = movieLength; i < this.swiper.slides.length; i += 1) {
+      positionsRemoveSlide.push(i);
+    }
+    this.swiper.removeSlide(positionsRemoveSlide);
+  }
+
+  createMovie(arrayPromises, dataMovie, i) {
     const movie = new Movie(
+      dataMovie.imdbID,
       dataMovie.Title,
       dataMovie.Poster,
       dataMovie.Year,
-      dataMovie.imdbID,
       this.movies,
     );
-    arrayPromises.push(movie.create());
+    const moviePromise = this.swiper.slides[i] && this.page === 1
+      ? movie.edit(this.swiper.slides[i])
+      : movie.create();
     arrayPromises.push(
+      moviePromise,
       new Promise((resolve) => {
         const img = new Image();
         img.src = dataMovie.Poster !== 'N/A' ? dataMovie.Poster : noPoster;
@@ -69,73 +108,39 @@ export default class Search {
     this.prompt.innerText = '';
     const form = e.target;
     const valueSearch = form.querySelector('.search_input').value;
-    this.swiper.removeAllSlides();
     this.page = 1;
-    this.search = valueSearch;
-    if (this.isCyrillic()) {
-      this.translate();
+    if (Search.isCyrillic(valueSearch)) {
+      this.translate(valueSearch);
     } else {
-      this.moviesPage();
+      this.moviesPage(valueSearch);
     }
   }
 
-  isCyrillic() {
-    return /[а-я]/i.test(this.search);
+  static isCyrillic(valueSearch) {
+    return /[а-я]/i.test(valueSearch);
   }
 
-  translate() {
-    fetch(`${yandexTranslate}&text=${this.search.trim()}`)
+  translate(valueSearch) {
+    fetch(`${yandexTranslate}&text=${valueSearch.trim()}`)
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
-        this.search = data.text[data.text.length - 1];
-        this.prompt.innerText = `Showing results for "${this.search}"`;
-        this.moviesPage();
+        const valueSearchTranslate = data.text[data.text.length - 1];
+        this.prompt.innerText = `Showing results for "${valueSearchTranslate}"`;
+        this.moviesPage(valueSearchTranslate);
       });
   }
 
-  initSwiper() {
-    this.swiper = new Swiper('.swiper-container', {
-      centerInsufficientSlides: true,
-      navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-      },
-      breakpoints: {
-        320: {
-          slidesPerView: 1,
-          spaceBetween: 10,
-        },
-        500: {
-          slidesPerView: 2,
-          spaceBetween: 20,
-        },
-        800: {
-          slidesPerView: 3,
-          spaceBetween: 30,
-        },
-        1200: {
-          slidesPerView: 4,
-          spaceBetween: 50,
-        },
-      },
-    });
-    this.swiper.on('reachEnd', () => {
-      this.nextPage();
-    });
-  }
-
   nextPage() {
-    console.log(this.totalResults, this.totalResults / this.page);
-    if (this.swiper.slides.length && this.totalResults / (this.page + 1) > 10) {
+    if (this.residue > this.swiper.slides.length) {
       this.page += 1;
-      this.moviesPage();
+      this.moviesPage(this.search);
     }
   }
 
-  errorOutput(error) {
+  errorOutput(error, search) {
     if (error === 'Movie not found!') {
-      this.prompt.innerText = `No results for "${this.search}"`;
+      this.prompt.innerText = `No results for "${search}"`;
     } else {
       this.prompt.innerText = error;
     }
