@@ -1,6 +1,6 @@
 import { OMDb, imdbLink } from '../constants';
-import noPoster from '../assets/img/noposter.png';
 import fetchJSON from '../utils';
+import noPoster from '../assets/img/noposter.png';
 
 export default class Movie {
   constructor(imdbID, movies) {
@@ -18,10 +18,17 @@ export default class Movie {
     this.rating = data.imdbRating;
   }
 
-  create() {
+  requestMovie() {
     return fetchJSON(`${OMDb}&i=${this.imdbID}`)
       .then((data) => {
         this.constructorMovie(data);
+        return data;
+      });
+  }
+
+  create() {
+    return this.requestMovie()
+      .then(() => {
         this.movies.push(this.createHTML());
       });
   }
@@ -65,9 +72,8 @@ export default class Movie {
   }
 
   edit() {
-    return fetchJSON(`${OMDb}&i=${this.imdbID}`)
-      .then((data) => {
-        this.constructorMovie(data);
+    return this.requestMovie()
+      .then(() => {
         this.movies.push(this);
       });
   }

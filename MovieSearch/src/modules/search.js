@@ -129,8 +129,7 @@ export default class Search {
   }
 
   translate(valueSearch) {
-    fetch(`${yandexTranslate}&text=${valueSearch.trim()}`)
-      .then((response) => response.json())
+    fetchJSON(`${yandexTranslate}&text=${valueSearch.trim()}`)
       .then((data) => {
         const valueSearchTranslate = data.text[data.text.length - 1];
         this.prompt.innerText = `Showing results for "${valueSearchTranslate}"`;
