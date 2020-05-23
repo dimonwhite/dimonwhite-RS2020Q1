@@ -2,9 +2,6 @@ import SearchFavoritesMovies from './SearchFavoritesMovies';
 
 export default class Favorites {
   constructor(swiper) {
-    this.favorites = localStorage.getItem('favorites')
-      ? JSON.parse(localStorage.getItem('favorites'))
-      : {};
     this.swiper = swiper;
     this.moviesBlock = document.querySelector('.movies');
     this.searchForm = document.querySelector('.search_block');
@@ -12,6 +9,7 @@ export default class Favorites {
   }
 
   init() {
+    this.getFavorites();
     const moviesBlock = document.querySelector('.movies');
     moviesBlock.addEventListener('click', (e) => {
       this.clickFavoriteBtn(e);
@@ -20,6 +18,12 @@ export default class Favorites {
       .addEventListener('click', (e) => {
         this.clickFavoritesLink(e);
       });
+  }
+
+  getFavorites() {
+    this.favorites = localStorage.getItem('favorites')
+      ? JSON.parse(localStorage.getItem('favorites'))
+      : {};
   }
 
   clickFavoritesLink(e) {
@@ -31,6 +35,7 @@ export default class Favorites {
   }
 
   initFavoritesMovies() {
+    this.getFavorites();
     const favoritesIds = Object.keys(this.favorites);
     if (favoritesIds.length) {
       this.prompt.innerText = '';
@@ -54,7 +59,7 @@ export default class Favorites {
     const { id } = favoriteBtn.dataset;
     favoriteBtn.classList.toggle('active');
     if (this.favorites[id]) {
-      delete this.favorites[id];
+      this.favorites[id] = undefined;
     } else {
       this.favorites[id] = id;
     }
