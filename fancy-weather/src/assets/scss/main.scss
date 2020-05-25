@@ -1,0 +1,46 @@
+@import "~normalize.css";
+@import "settings/mixins";
+
+* , *:before, *:after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+$grey: rgba(#AEB5B9, 0.5);
+
+html {
+    height: 100%;
+    font-size: 1.39vw;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    font-family: "Roboto", sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.4;
+    color: #fff;
+    background-color: #2d2d2d;
+}
+
+.container {
+    padding: 0 calc(50% - 31.5rem);
+    @include media(1480px) {
+        padding: 0 40px;
+    }
+    @include media(900px) {
+        padding: 0 20px;
+    }
+    @include media(460px) {
+        padding: 0 10px;
+    }
+}
+
+button {
+    cursor: pointer;
+}
+
+
