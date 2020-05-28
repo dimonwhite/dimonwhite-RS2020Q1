@@ -1,6 +1,6 @@
 const path = require('path');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const CleanObsoleteChunks = require('webpack-clean-obsolete-chunks');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin');
@@ -25,7 +25,7 @@ const optimization = () => {
   return config;
 };
 
-const filename = (ext) => isDev ? `[name].${ext}` : `[name].[hash].${ext}`;
+const filename = (ext) => (isDev ? `[name].${ext}` : `[name].[hash].${ext}`);
 
 const cssLoaders = (extra) => {
   const loaders = [
@@ -78,7 +78,7 @@ const plugins = () => {
         collapseWhitespace: isProd,
       },
     }),
-    new CleanWebpackPlugin(),
+    new CleanObsoleteChunks(),
     new CopyWebpackPlugin([
       {
         from: path.resolve(__dirname, 'src/favicon.ico'),
@@ -136,7 +136,7 @@ module.exports = {
         test: /\.(html)$/,
         use: {
           loader: 'html-loader',
-        }
+        },
       },
       {
         test: /\.(ttf|woff|woff2|eot)$/,

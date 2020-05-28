@@ -7,24 +7,117 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Movie Search</title>
     <link rel="icon" href="./favicon.ico" type="image/ico">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body class="container">
     <header class="header">
         <div class="header_btns">
-            <button class="update">
+            <button class="update header_btn">
                 <svg class="svg_icon">
                     <use xlink:href="sprite.svg#update"></use>
                 </svg>
             </button>
+            <div class="dropdown header_btn">
+                <div class="dropdown_top">
+                    <div class="dropdown_text">EN</div>
+                </div>
+                <ul class="dropdown_list">
+                    <li class="dropdown_list_item active">EN</li>
+                    <li class="dropdown_list_item">RU</li>
+                    <li class="dropdown_list_item">BE</li>
+                </ul>
+            </div>
+            <div class="radio header_btn">
+                <label class="radio_item">
+                    <input class="radio_input" type="radio" value="fahrenheit" name="degrees">
+                    <span class="radio_text">°F</span>
+                </label>
+                <label class="radio_item">
+                    <input class="radio_input" type="radio" value="celsius" name="degrees" checked>
+                    <span class="radio_text">°С</span>
+                </label>
+            </div>
         </div>
         <form class="header_form">
-
+            <div class="search_wrap">
+                <input class="search" type="text" placeholder="Search city or ZIP">
+                <button class="mic" type="button">
+                    <svg class="svg_icon">
+                        <use xlink:href="sprite.svg#mic"></use>
+                    </svg>
+                </button>
+            </div>
+            <button class="btn">Search</button>
         </form>
     </header>
 
     <main class="main">
-
+        <div class="weather">
+            <div class="weather_city">Minsk, Belarus</div>
+            <div class="weather_date">
+                <span class="date">Mon 28 October</span>
+                <span class="time">
+                    <span class="hours">17</span>:<span class="minutes">23</span>
+                </span>
+            </div>
+            <div class="weather_main">
+                <div class="weather_main_degrees">10</div>
+                <div class="weather_info">
+                    <div class="weather_main_img">
+                        <img src="assets/img/cloud.png" alt="weather" class="img">
+                    </div>
+                    <div class="weather_text">overcast</div>
+                    <div class="feels">
+                        <span class="feels_title">Feels like:</span> <span class="degrees">7°</span>
+                    </div>
+                    <div class="wind">
+                        <span class="wind_title">Wind:</span> <span class="value">2 m/s</span>
+                    </div>
+                    <div class="humidity">
+                        <span class="humidity_title">Humidity:</span> <span class="value">83%</span>
+                    </div>
+                </div>
+            </div>
+            <div class="briefly">
+                <div class="briefly_item">
+                    <div class="briefly_item_day">Tuesday</div>
+                    <div class="briefly_item_degrees">7°</div>
+                    <div class="briefly_item_img">
+                        <img src="assets/img/cloud.png" alt="weather" class="img">
+                    </div>
+                </div>
+                <div class="briefly_item">
+                    <div class="briefly_item_day">Wednesday</div>
+                    <div class="briefly_item_degrees">7°</div>
+                    <div class="briefly_item_img">
+                        <img src="assets/img/cloud.png" alt="weather" class="img">
+                    </div>
+                </div>
+                <div class="briefly_item">
+                    <div class="briefly_item_day">Thursday</div>
+                    <div class="briefly_item_degrees">7°</div>
+                    <div class="briefly_item_img">
+                        <img src="assets/img/cloud.png" alt="weather" class="img">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="main_right">
+            <div class="map" id="map"></div>
+            <div class="location">
+                <div class="latitude">
+                    <span class="latitude_title">Latitude:</span> <span class="value">53°54'</span>
+                </div>
+                <div class="longitude">
+                    <span class="longitude_title">Longitude:</span> <span class="value">27°34'</span>
+                </div>
+            </div>
+        </div>
     </main>
+
+    <svg class="svg">
+        <clipPath id="my-clip-path" clipPathUnits="objectBoundingBox"><path d="m0.146,0 c-0.081,0,-0.146,0.058,-0.146,0.131 v0.632 c0,0.073,0.065,0.131,0.146,0.131 h0.687 l0.167,0.106 v-0.245 l0,0 v-0.624 c0,-0.073,-0.065,-0.131,-0.146,-0.131 h-0.707"></path></clipPath>
+    </svg>
+    <script src="https://api-maps.yandex.ru/2.1?apikey=ff36289b-6994-429a-a7e5-ec2aad424012&lang=ru_RU&onload=init"></script>
 </body>
 </html>
