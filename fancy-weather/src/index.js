@@ -1,5 +1,5 @@
 import './assets/scss/main.scss';
-import Dropdown from '@modules/dropdown';
+import App from '@modules/App';
 
 function importAll(r) {
   return r.keys().map(r);
@@ -14,6 +14,5 @@ window.init = () => {
   const myMap = new ymaps.Map('map', { center: result, zoom: 12, controls: [] });
 };
 
-const dropdown = new Dropdown('.dropdown', '.dropdown_top', '.dropdown_list');
-
-dropdown.init();
+const app = new App();
+app.init();

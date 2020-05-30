@@ -1,0 +1,41 @@
+{
+  "searchPlaceholder": "Знайсці горад ці індэкс",
+  "searchBtn": "Пошук",
+  "latitude": "Шырата",
+  "longitude": "Даўгата",
+  "feelsLike": "Адчуваецца як:",
+  "wind": "Вецер:",
+  "humidity": "Вільготнасць:",
+  "short": {
+    "mon": "Пн",
+    "tue": "Аў",
+    "wed": "Ср",
+    "thu": "Чц",
+    "fri": "Пт",
+    "sat": "Сб",
+    "sun": "Нз"
+  },
+  "full": {
+    "monday": "Панядзелак",
+    "tuesday": "Аўторак",
+    "wednesday": "Серада",
+    "thursday": "Чацвер",
+    "friday": "Пятніца",
+    "saturday": "Субота",
+    "sunday": "Нядзеля"
+  },
+  "months": {
+    "january": "Студзень",
+    "february": "Люты",
+    "march": "Сакавік",
+    "april": "Красавік",
+    "may": "Май",
+    "june": "Чэрвень",
+    "july": "Ліпень",
+    "august": "Жнівень",
+    "september": "Верасень",
+    "october": "Кастрычніцк",
+    "november": "Лістапад",
+    "december": "Снежань"
+  }
+}

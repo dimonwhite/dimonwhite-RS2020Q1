@@ -175,6 +175,9 @@ button {
             cursor: pointer;
 
             transition: 0.5s;
+            &.active {
+                background-color: $grey;
+            }
             &:hover {
                 background-color: #4C5255;
             }

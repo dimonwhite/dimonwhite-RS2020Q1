@@ -1,0 +1,41 @@
+{
+  "searchPlaceholder": "Найти город или индекс",
+  "searchBtn": "Поиск",
+  "latitude": "Широта",
+  "longitude": "Долгота",
+  "feelsLike": "Ощущается как:",
+  "wind": "Ветер:",
+  "humidity": "Влажность:",
+  "short": {
+    "mon": "Пн",
+    "tue": "Вт",
+    "wed": "Ср",
+    "thu": "Чт",
+    "fri": "Пт",
+    "sat": "Сб",
+    "sun": "Вс"
+  },
+  "full": {
+    "monday": "Понедельник",
+    "tuesday": "Вторник",
+    "wednesday": "Среда",
+    "thursday": "Четверг",
+    "friday": "Пятница",
+    "saturday": "Суббота",
+    "sunday": "Воскресенье"
+  },
+  "months": {
+    "january": "Январь",
+    "february": "Февраль",
+    "march": "Март",
+    "april": "Апрель",
+    "may": "Май",
+    "june": "Июнь",
+    "july": "Июль",
+    "august": "Август",
+    "september": "Сентябрь",
+    "october": "Октябрь",
+    "november": "Ноябрь",
+    "december": "Декабрь"
+  }
+}
