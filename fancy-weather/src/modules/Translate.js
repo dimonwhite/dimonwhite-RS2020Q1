@@ -12,9 +12,6 @@ export default class Translate {
   }
 
   init() {
-    if (this.lang !== 'en') {
-      this.changeElements();
-    }
     document.addEventListener('languageChange', (e) => {
       this.lang = e.detail.dataset.lang;
       localStorage.setItem('lang', this.lang);

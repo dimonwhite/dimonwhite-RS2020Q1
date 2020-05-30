@@ -6,6 +6,7 @@
   "feelsLike": "Feels like:",
   "wind": "Wind:",
   "humidity": "Humidity:",
+  "ms": "m/s",
   "short": {
     "mon": "Mon",
     "tue": "Tue",

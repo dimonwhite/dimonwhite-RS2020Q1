@@ -53,7 +53,7 @@
 
     <main class="main">
         <div class="weather">
-            <div class="weather_city">Minsk, Belarus</div>
+            <div class="weather_city"><span data-info="city"></span>, <span data-info="country"></span></div>
             <div class="weather_date">
                 <span class="date"><span data-trs="short.mon">Mon</span> 28 <span data-trs="months.october">October</span></span>
                 <span class="time">
@@ -71,7 +71,7 @@
                         <span class="feels_title" data-trs="feelsLike">Feels like:</span> <span class="degrees">7°</span>
                     </div>
                     <div class="wind">
-                        <span class="wind_title" data-trs="wind">Wind:</span> <span class="value">2 m/s</span>
+                        <span class="wind_title" data-trs="wind">Wind:</span> <span class="value">2 <span data-trs="ms">m/s</span></span>
                     </div>
                     <div class="humidity">
                         <span class="humidity_title" data-trs="humidity">Humidity:</span> <span class="value">83%</span>
@@ -106,10 +106,10 @@
             <div class="map" id="map"></div>
             <div class="location">
                 <div class="latitude">
-                    <span class="latitude_title" data-trs="latitude">Latitude:</span> <span class="value">53°54'</span>
+                    <span class="latitude_title" data-trs="latitude">Latitude:</span> <span class="value" data-info="lat"></span>
                 </div>
                 <div class="longitude">
-                    <span class="longitude_title" data-trs="longitude">Longitude:</span> <span class="value">27°34'</span>
+                    <span class="longitude_title" data-trs="longitude">Longitude:</span> <span class="value" data-info="lng"></span>
                 </div>
             </div>
         </div>
@@ -118,6 +118,6 @@
     <svg class="svg">
         <clipPath id="my-clip-path" clipPathUnits="objectBoundingBox"><path d="m0.146,0 c-0.081,0,-0.146,0.058,-0.146,0.131 v0.632 c0,0.073,0.065,0.131,0.146,0.131 h0.687 l0.167,0.106 v-0.245 l0,0 v-0.624 c0,-0.073,-0.065,-0.131,-0.146,-0.131 h-0.707"></path></clipPath>
     </svg>
-    <script src="https://api-maps.yandex.ru/2.1?apikey=ff36289b-6994-429a-a7e5-ec2aad424012&lang=en_US&onload=init"></script>
+    <script src="https://api-maps.yandex.ru/2.1?apikey=ff36289b-6994-429a-a7e5-ec2aad424012&lang=en_US"></script>
 </body>
 </html>
