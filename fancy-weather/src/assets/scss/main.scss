@@ -1,5 +1,6 @@
 @import "~normalize.css";
 @import "settings/mixins";
+@import "settings/preloader";
 
 * , *:before, *:after {
     box-sizing: border-box;
@@ -16,6 +17,8 @@ html {
 }
 
 body {
+    position: relative;
+
     display: flex;
     flex-direction: column;
     min-height: 100%;
@@ -31,6 +34,20 @@ body {
     background-position: center;
     background-size: cover;
     background-attachment: fixed;
+    .main {
+        display: none;
+    }
+    .preloaded {
+        display: block;
+    }
+    &.active {
+        .main {
+            display: block;
+        }
+        .preloaded {
+            display: none;
+        }
+    }
 }
 
 .container {
@@ -313,6 +330,14 @@ button {
             clip-path: url(#my-clip-path);
         }
     }
+}
+
+.preloaded {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
 }
 
 .weather {

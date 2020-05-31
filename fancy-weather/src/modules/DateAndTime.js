@@ -55,10 +55,12 @@ export default class DateAndTime {
     this.minutes = this.date.getMinutes();
     this.seconds = this.date.getSeconds();
     this.dayWeekEl.textContent = this[this.lang].short[days[this.date.getDay()]];
+    this.dayWeekEl.dataset.trs = `short.${days[this.date.getDay()]}`;
     this.monthEl.textContent = this[this.lang].months[months[this.date.getMonth()]];
+    this.monthEl.dataset.trs = `months.${months[this.date.getMonth()]}`;
     this.dayMonthEl.textContent = this.date.getDate();
     this.hoursEl.textContent = this.hours;
-    this.minEl.textContent = this.minutes;
+    this.minEl.textContent = this.minutes > 9 ? this.minutes : `0${this.minutes}`;
   }
 
   initTimer() {
@@ -77,7 +79,7 @@ export default class DateAndTime {
       this.changeHours();
       this.minutes = 0;
     }
-    this.minEl.textContent = this.minutes;
+    this.minEl.textContent = this.minutes > 9 ? this.minutes : `0${this.minutes}`;
   }
 
   changeHours() {

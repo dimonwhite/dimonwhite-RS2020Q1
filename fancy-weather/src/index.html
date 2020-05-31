@@ -10,6 +10,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body class="container">
+    <div class="preloaded" id="circularG">
+        <div id="circularG_1" class="circularG"></div>
+        <div id="circularG_2" class="circularG"></div>
+        <div id="circularG_3" class="circularG"></div>
+        <div id="circularG_4" class="circularG"></div>
+        <div id="circularG_5" class="circularG"></div>
+        <div id="circularG_6" class="circularG"></div>
+        <div id="circularG_7" class="circularG"></div>
+        <div id="circularG_8" class="circularG"></div>
+    </div>
     <main class="main">
         <header class="header">
             <div class="header_btns">
@@ -56,26 +66,26 @@
             <div class="weather">
                 <div class="weather_city"><span data-info="city"></span>, <span data-info="country"></span></div>
                 <div class="weather_date">
-                    <span class="date"><span class="dayWeek" data-trs="short.mon">Mon</span> <span class="dayMonth">28</span> <span class="month" data-trs="months.october">October</span></span>
+                    <span class="date"><span class="dayWeek" data-trs="short.mon"></span> <span class="dayMonth"></span> <span class="month" data-trs="months.october"></span></span>
                     <span class="time">
-                        <span class="hours">17</span>:<span class="minutes">23</span>
+                        <span class="hours"></span>:<span class="minutes"></span>
                     </span>
                 </div>
                 <div class="weather_main">
-                    <div class="weather_main_degrees">10</div>
+                    <div class="weather_main_degrees" data-weather="degrees">10</div>
                     <div class="weather_info">
                         <div class="weather_main_img">
                             <img src="assets/img/cloud.png" alt="weather" class="img">
                         </div>
-                        <div class="weather_text">overcast</div>
+                        <div class="weather_text" data-weather="weather">overcast</div>
                         <div class="feels">
-                            <span class="feels_title" data-trs="feelsLike">Feels like:</span> <span class="degrees">7°</span>
+                            <span class="feels_title" data-trs="feelsLike">Feels like:</span> <span class="degrees" data-weather="feelsLike">7</span>°
                         </div>
                         <div class="wind">
-                            <span class="wind_title" data-trs="wind">Wind:</span> <span class="value">2 <span data-trs="ms">m/s</span></span>
+                            <span class="wind_title" data-trs="wind">Wind:</span> <span class="value" data-weather="wind">2</span> <span data-trs="ms">m/s</span>
                         </div>
                         <div class="humidity">
-                            <span class="humidity_title" data-trs="humidity">Humidity:</span> <span class="value">83%</span>
+                            <span class="humidity_title" data-trs="humidity">Humidity:</span> <span class="value" data-weather="humidity">83</span>%
                         </div>
                     </div>
                 </div>

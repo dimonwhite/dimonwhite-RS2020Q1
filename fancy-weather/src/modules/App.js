@@ -1,17 +1,25 @@
 import { ipinfo, opencagedata, weatherAPI } from '@/constants';
-import fetchJSON from '@/utils';
+import generateImage from '@modules/generateImage';
+import { fetchJSON, getTimesOfDay, changeGeometry } from '@/utils';
 import Translate from '@modules/Translate';
 import Dropdown from '@modules/Dropdown';
 import Map from '@modules/Map';
 import Info from '@modules/Info';
 import DateAndTime from '@modules/DateAndTime';
+import Weather from '@modules/Weather';
 
 const infoClass = new Info();
 const date = new DateAndTime();
+const weather = new Weather();
 
 export default class App {
   constructor() {
     this.info = {};
+    this.weather = {
+      one: {},
+      two: {},
+      three: {},
+    };
     this.translate = new Translate();
     this.ymaps = window.ymaps;
   }
@@ -25,6 +33,10 @@ export default class App {
 
     this.getCity();
     this.createMap();
+    document.querySelector('.header .update')
+      .addEventListener('click', () => {
+        this.changeImage();
+      });
   }
 
   getCity() {
@@ -37,14 +49,13 @@ export default class App {
   getInfo(city) {
     fetchJSON(`${opencagedata}&q=${city}&language=${this.lang}`)
       .then((data) => {
-        this.ENCity = city;
         const info = data.results[0];
         this.info.city = info.components.city;
         this.info.country = info.components.country;
         this.fullLat = info.geometry.lat;
         this.fullLng = info.geometry.lng;
-        this.info.lat = App.changeGeometry(String(info.geometry.lat));
-        this.info.lng = App.changeGeometry(String(info.geometry.lng));
+        this.info.lat = changeGeometry(String(info.geometry.lat));
+        this.info.lng = changeGeometry(String(info.geometry.lng));
         this.getWeather();
         this.map.setCenter(this.fullLat, this.fullLng);
       });
@@ -53,16 +64,13 @@ export default class App {
   getWeather() {
     fetchJSON(`${weatherAPI}&lat=${this.fullLat}&lon=${this.fullLng}&lang=${this.lang}`)
       .then((data) => {
-        console.log(data);
+        this.setWeatherInfo(data);
         infoClass.changeInfo(this.info);
         this.dropdown.changeActiveElememnt(document.querySelector(`[data-lang=${this.lang}]`));
         date.init(this.lang);
+        this.changeImage();
+        document.body.classList.add('active');
       });
-  }
-
-  static changeGeometry(geometry) {
-    const geometryItem = geometry.split('.');
-    return `${geometryItem[0]}°${geometryItem[1].slice(0, 2)}'`;
   }
 
   createMap() {
@@ -70,5 +78,23 @@ export default class App {
     this.ymaps.ready(() => {
       this.map.init();
     });
+  }
+
+  changeImage() {
+    fetchJSON(`${weatherAPI}&lat=${this.fullLat}&lon=${this.fullLng}&lang=en`)
+      .then((data) => {
+        const timesOfDay = getTimesOfDay(date.hours);
+        generateImage(`${data.current.weather[0].description} ${timesOfDay}`);
+      });
+  }
+
+  setWeatherInfo(data) {
+    const { current } = data;
+    this.weather.degrees = Math.round(current.temp);
+    this.weather.feelsLike = Math.round(current.feels_like);
+    this.weather.wind = Math.round(current.wind_speed);
+    this.weather.humidity = current.humidity;
+    this.weather.weather = current.weather[0].description;
+    weather.changeInfo(this.weather);
   }
 }
