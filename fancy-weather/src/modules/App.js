@@ -4,8 +4,10 @@ import Translate from '@modules/Translate';
 import Dropdown from '@modules/Dropdown';
 import Map from '@modules/Map';
 import Info from '@modules/Info';
+import DateAndTime from '@modules/DateAndTime';
 
 const infoClass = new Info();
+const date = new DateAndTime();
 
 export default class App {
   constructor() {
@@ -43,7 +45,6 @@ export default class App {
         this.fullLng = info.geometry.lng;
         this.info.lat = App.changeGeometry(String(info.geometry.lat));
         this.info.lng = App.changeGeometry(String(info.geometry.lng));
-        console.log(this);
         this.getWeather();
         this.map.setCenter(this.fullLat, this.fullLng);
       });
@@ -55,6 +56,7 @@ export default class App {
         console.log(data);
         infoClass.changeInfo(this.info);
         this.dropdown.changeActiveElememnt(document.querySelector(`[data-lang=${this.lang}]`));
+        date.init(this.lang);
       });
   }
 

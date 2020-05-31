@@ -10,109 +10,111 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body class="container">
-    <header class="header">
-        <div class="header_btns">
-            <button class="update header_btn">
-                <svg class="svg_icon">
-                    <use xlink:href="sprite.svg#update"></use>
-                </svg>
-            </button>
-            <div class="dropdown header_btn">
-                <div class="dropdown_top">
-                    <div class="dropdown_text">EN</div>
-                </div>
-                <ul class="dropdown_list">
-                    <li class="dropdown_list_item active" data-lang="en">EN</li>
-                    <li class="dropdown_list_item" data-lang="ru">RU</li>
-                    <li class="dropdown_list_item" data-lang="be">BE</li>
-                </ul>
-            </div>
-            <div class="radio header_btn">
-                <label class="radio_item">
-                    <input class="radio_input" type="radio" value="fahrenheit" name="degrees">
-                    <span class="radio_text">°F</span>
-                </label>
-                <label class="radio_item">
-                    <input class="radio_input" type="radio" value="celsius" name="degrees" checked>
-                    <span class="radio_text">°С</span>
-                </label>
-            </div>
-        </div>
-        <form class="header_form">
-            <div class="search_wrap">
-                <input class="search" type="text" placeholder="Search city or ZIP" data-trs="searchPlaceholder">
-                <button class="mic" type="button">
+    <main class="main">
+        <header class="header">
+            <div class="header_btns">
+                <button class="update header_btn">
                     <svg class="svg_icon">
-                        <use xlink:href="sprite.svg#mic"></use>
+                        <use xlink:href="sprite.svg#update"></use>
                     </svg>
                 </button>
+                <div class="dropdown header_btn">
+                    <div class="dropdown_top">
+                        <div class="dropdown_text">EN</div>
+                    </div>
+                    <ul class="dropdown_list">
+                        <li class="dropdown_list_item active" data-lang="en">EN</li>
+                        <li class="dropdown_list_item" data-lang="ru">RU</li>
+                        <li class="dropdown_list_item" data-lang="be">BE</li>
+                    </ul>
+                </div>
+                <div class="radio header_btn">
+                    <label class="radio_item">
+                        <input class="radio_input" type="radio" value="fahrenheit" name="degrees">
+                        <span class="radio_text">°F</span>
+                    </label>
+                    <label class="radio_item">
+                        <input class="radio_input" type="radio" value="celsius" name="degrees" checked>
+                        <span class="radio_text">°С</span>
+                    </label>
+                </div>
             </div>
-            <button class="btn" data-trs="searchBtn">Search</button>
-        </form>
-    </header>
+            <form class="header_form">
+                <div class="search_wrap">
+                    <input class="search" type="text" placeholder="Search city or ZIP" data-trs="searchPlaceholder">
+                    <button class="mic" type="button">
+                        <svg class="svg_icon">
+                            <use xlink:href="sprite.svg#mic"></use>
+                        </svg>
+                    </button>
+                </div>
+                <button class="btn" data-trs="searchBtn">Search</button>
+            </form>
+        </header>
 
-    <main class="main">
-        <div class="weather">
-            <div class="weather_city"><span data-info="city"></span>, <span data-info="country"></span></div>
-            <div class="weather_date">
-                <span class="date"><span data-trs="short.mon">Mon</span> 28 <span data-trs="months.october">October</span></span>
-                <span class="time">
-                    <span class="hours">17</span>:<span class="minutes">23</span>
-                </span>
-            </div>
-            <div class="weather_main">
-                <div class="weather_main_degrees">10</div>
-                <div class="weather_info">
-                    <div class="weather_main_img">
-                        <img src="assets/img/cloud.png" alt="weather" class="img">
+        <section class="app">
+            <div class="weather">
+                <div class="weather_city"><span data-info="city"></span>, <span data-info="country"></span></div>
+                <div class="weather_date">
+                    <span class="date"><span class="dayWeek" data-trs="short.mon">Mon</span> <span class="dayMonth">28</span> <span class="month" data-trs="months.october">October</span></span>
+                    <span class="time">
+                        <span class="hours">17</span>:<span class="minutes">23</span>
+                    </span>
+                </div>
+                <div class="weather_main">
+                    <div class="weather_main_degrees">10</div>
+                    <div class="weather_info">
+                        <div class="weather_main_img">
+                            <img src="assets/img/cloud.png" alt="weather" class="img">
+                        </div>
+                        <div class="weather_text">overcast</div>
+                        <div class="feels">
+                            <span class="feels_title" data-trs="feelsLike">Feels like:</span> <span class="degrees">7°</span>
+                        </div>
+                        <div class="wind">
+                            <span class="wind_title" data-trs="wind">Wind:</span> <span class="value">2 <span data-trs="ms">m/s</span></span>
+                        </div>
+                        <div class="humidity">
+                            <span class="humidity_title" data-trs="humidity">Humidity:</span> <span class="value">83%</span>
+                        </div>
                     </div>
-                    <div class="weather_text">overcast</div>
-                    <div class="feels">
-                        <span class="feels_title" data-trs="feelsLike">Feels like:</span> <span class="degrees">7°</span>
+                </div>
+                <div class="briefly">
+                    <div class="briefly_item">
+                        <div class="briefly_item_day" data-trs="full.tuesday">Tuesday</div>
+                        <div class="briefly_item_degrees">7°</div>
+                        <div class="briefly_item_img">
+                            <img src="assets/img/cloud.png" alt="weather" class="img">
+                        </div>
                     </div>
-                    <div class="wind">
-                        <span class="wind_title" data-trs="wind">Wind:</span> <span class="value">2 <span data-trs="ms">m/s</span></span>
+                    <div class="briefly_item">
+                        <div class="briefly_item_day" data-trs="full.wednesday">Wednesday</div>
+                        <div class="briefly_item_degrees">7°</div>
+                        <div class="briefly_item_img">
+                            <img src="assets/img/cloud.png" alt="weather" class="img">
+                        </div>
                     </div>
-                    <div class="humidity">
-                        <span class="humidity_title" data-trs="humidity">Humidity:</span> <span class="value">83%</span>
+                    <div class="briefly_item">
+                        <div class="briefly_item_day" data-trs="full.thursday">Thursday</div>
+                        <div class="briefly_item_degrees">7°</div>
+                        <div class="briefly_item_img">
+                            <img src="assets/img/cloud.png" alt="weather" class="img">
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="briefly">
-                <div class="briefly_item">
-                    <div class="briefly_item_day" data-trs="full.tuesday">Tuesday</div>
-                    <div class="briefly_item_degrees">7°</div>
-                    <div class="briefly_item_img">
-                        <img src="assets/img/cloud.png" alt="weather" class="img">
+            <div class="app_right">
+                <div class="map" id="map"></div>
+                <div class="location">
+                    <div class="latitude">
+                        <span class="latitude_title" data-trs="latitude">Latitude:</span> <span class="value" data-info="lat"></span>
                     </div>
-                </div>
-                <div class="briefly_item">
-                    <div class="briefly_item_day" data-trs="full.wednesday">Wednesday</div>
-                    <div class="briefly_item_degrees">7°</div>
-                    <div class="briefly_item_img">
-                        <img src="assets/img/cloud.png" alt="weather" class="img">
-                    </div>
-                </div>
-                <div class="briefly_item">
-                    <div class="briefly_item_day" data-trs="full.thursday">Thursday</div>
-                    <div class="briefly_item_degrees">7°</div>
-                    <div class="briefly_item_img">
-                        <img src="assets/img/cloud.png" alt="weather" class="img">
+                    <div class="longitude">
+                        <span class="longitude_title" data-trs="longitude">Longitude:</span> <span class="value" data-info="lng"></span>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="main_right">
-            <div class="map" id="map"></div>
-            <div class="location">
-                <div class="latitude">
-                    <span class="latitude_title" data-trs="latitude">Latitude:</span> <span class="value" data-info="lat"></span>
-                </div>
-                <div class="longitude">
-                    <span class="longitude_title" data-trs="longitude">Longitude:</span> <span class="value" data-info="lng"></span>
-                </div>
-            </div>
-        </div>
+        </section>
     </main>
 
     <svg class="svg">
