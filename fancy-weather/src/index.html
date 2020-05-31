@@ -40,11 +40,11 @@
                 </div>
                 <div class="radio header_btn">
                     <label class="radio_item">
-                        <input class="radio_input" type="radio" value="fahrenheit" name="degrees">
+                        <input class="radio_input" type="radio" value="fah" name="degrees">
                         <span class="radio_text">°F</span>
                     </label>
                     <label class="radio_item">
-                        <input class="radio_input" type="radio" value="celsius" name="degrees" checked>
+                        <input class="radio_input" type="radio" value="cel" name="degrees" checked>
                         <span class="radio_text">°С</span>
                     </label>
                 </div>
@@ -72,14 +72,12 @@
                     </span>
                 </div>
                 <div class="weather_main">
-                    <div class="weather_main_degrees" data-weather="degrees">10</div>
+                    <div class="weather_main_degrees degreesNumber" data-weather="degrees">10</div>
                     <div class="weather_info">
-                        <div class="weather_main_img">
-                            <img src="assets/img/cloud.png" alt="weather" class="img">
-                        </div>
+                        <div class="weather_main_img" data-img="img"></div>
                         <div class="weather_text" data-weather="weather">overcast</div>
                         <div class="feels">
-                            <span class="feels_title" data-trs="feelsLike">Feels like:</span> <span class="degrees" data-weather="feelsLike">7</span>°
+                            <span class="feels_title" data-trs="feelsLike">Feels like:</span> <span class="degrees degreesNumber" data-weather="feelsLike">7</span>°
                         </div>
                         <div class="wind">
                             <span class="wind_title" data-trs="wind">Wind:</span> <span class="value" data-weather="wind">2</span> <span data-trs="ms">m/s</span>
@@ -91,24 +89,24 @@
                 </div>
                 <div class="briefly">
                     <div class="briefly_item">
-                        <div class="briefly_item_day" data-trs="full.tuesday">Tuesday</div>
-                        <div class="briefly_item_degrees">7°</div>
-                        <div class="briefly_item_img">
-                            <img src="assets/img/cloud.png" alt="weather" class="img">
+                        <div class="briefly_item_day one_day" data-trs="full.wed">Tuesday</div>
+                        <div class="briefly_item_bottom">
+                            <div class="briefly_item_degrees"><span class="degreesNumber" data-weather="one.degrees">7</span>°</div>
+                            <div class="briefly_item_img" data-img="one.img"></div>
                         </div>
                     </div>
                     <div class="briefly_item">
-                        <div class="briefly_item_day" data-trs="full.wednesday">Wednesday</div>
-                        <div class="briefly_item_degrees">7°</div>
-                        <div class="briefly_item_img">
-                            <img src="assets/img/cloud.png" alt="weather" class="img">
+                        <div class="briefly_item_day two_day" data-trs="full.wed">Wednesday</div>
+                        <div class="briefly_item_bottom">
+                            <div class="briefly_item_degrees"><span class="degreesNumber" data-weather="two.degrees">7</span>°</div>
+                            <div class="briefly_item_img" data-img="two.img"></div>
                         </div>
                     </div>
                     <div class="briefly_item">
-                        <div class="briefly_item_day" data-trs="full.thursday">Thursday</div>
-                        <div class="briefly_item_degrees">7°</div>
-                        <div class="briefly_item_img">
-                            <img src="assets/img/cloud.png" alt="weather" class="img">
+                        <div class="briefly_item_day three_day" data-trs="full.thu">Thursday</div>
+                        <div class="briefly_item_bottom">
+                            <div class="briefly_item_degrees"><span class="degreesNumber" data-weather="three.degrees">7</span>°</div>
+                            <div class="briefly_item_img" data-img="three.img"></div>
                         </div>
                     </div>
                 </div>

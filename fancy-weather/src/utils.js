@@ -27,4 +27,26 @@ const changeGeometry = (geometry) => {
   return `${geometryItem[0]}°${geometryItem[1].slice(0, 2)}'`;
 };
 
-export { fetchJSON, getTimesOfDay, changeGeometry };
+const objectAverage = (obj) => {
+  const keysArray = Object.keys(obj);
+  return keysArray.reduce((sum, key) => sum + obj[key], 0) / keysArray.length;
+};
+
+const getNextDay = (day) => (day + 1 <= 6 ? day + 1 : 0);
+
+const celToFah = (degrees) => Math.round(+degrees * (9 / 5) + 32);
+
+const fahToCel = (degrees) => Math.round((+degrees - 32) * (5 / 9));
+
+const getResult = (path, res) => {
+  let result = res;
+  path.forEach((piece) => {
+    result = result[piece];
+  });
+  return result;
+};
+
+export {
+  fetchJSON, getTimesOfDay, changeGeometry, objectAverage,
+  getNextDay, celToFah, fahToCel, getResult,
+};

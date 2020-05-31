@@ -1,6 +1,8 @@
 import { ipinfo, opencagedata, weatherAPI } from '@/constants';
 import generateImage from '@modules/generateImage';
-import { fetchJSON, getTimesOfDay, changeGeometry } from '@/utils';
+import {
+  fetchJSON, getTimesOfDay, changeGeometry, objectAverage,
+} from '@/utils';
 import Translate from '@modules/Translate';
 import Dropdown from '@modules/Dropdown';
 import Map from '@modules/Map';
@@ -33,10 +35,16 @@ export default class App {
 
     this.getCity();
     this.createMap();
+    App.changeRadioDegrees();
     document.querySelector('.header .update')
       .addEventListener('click', () => {
         this.changeImage();
       });
+    document.querySelectorAll('.radio_input').forEach((radio) => {
+      radio.addEventListener('change', (e) => {
+        weather.changeDegrees(e.target.value);
+      });
+    });
   }
 
   getCity() {
@@ -56,6 +64,7 @@ export default class App {
         this.fullLng = info.geometry.lng;
         this.info.lat = changeGeometry(String(info.geometry.lat));
         this.info.lng = changeGeometry(String(info.geometry.lng));
+        this.timezone = info.annotations.timezone.offset_sec / 3600;
         this.getWeather();
         this.map.setCenter(this.fullLat, this.fullLng);
       });
@@ -67,7 +76,7 @@ export default class App {
         this.setWeatherInfo(data);
         infoClass.changeInfo(this.info);
         this.dropdown.changeActiveElememnt(document.querySelector(`[data-lang=${this.lang}]`));
-        date.init(this.lang);
+        date.init(this.lang, this.timezone);
         this.changeImage();
         document.body.classList.add('active');
       });
@@ -95,6 +104,15 @@ export default class App {
     this.weather.wind = Math.round(current.wind_speed);
     this.weather.humidity = current.humidity;
     this.weather.weather = current.weather[0].description;
+    this.weather.img = current.weather[0].icon;
+    ['one', 'two', 'three'].forEach((day, i) => {
+      this.weather[day].degrees = Math.round(objectAverage(data.daily[i + 1].temp));
+      this.weather[day].img = data.daily[i + 1].weather[0].icon;
+    });
     weather.changeInfo(this.weather);
+  }
+
+  static changeRadioDegrees() {
+    document.querySelector(`[value="${weather.degreesFormat}"]`).checked = true;
   }
 }

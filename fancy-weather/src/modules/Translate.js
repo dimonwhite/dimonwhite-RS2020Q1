@@ -1,3 +1,4 @@
+import { getResult } from '@/utils';
 import ru from '../data/ru.json';
 import en from '../data/en.json';
 import be from '../data/be.json';
@@ -23,11 +24,8 @@ export default class Translate {
     this.elements.forEach((el) => {
       const { trs } = el.dataset;
       const path = trs.split('.');
-      let result = this[this.lang];
+      const result = getResult(path, this[this.lang]);
 
-      path.forEach((piece) => {
-        result = result[piece];
-      });
       const element = el;
       if (trs === 'searchPlaceholder') {
         element.setAttribute('placeholder', result);

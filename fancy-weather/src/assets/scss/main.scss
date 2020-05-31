@@ -341,7 +341,7 @@ button {
 }
 
 .weather {
-    width: 55%;
+    max-width: 65%;
     &_city {
         font-size: 2.2rem;
         font-weight: 700;
@@ -358,17 +358,21 @@ button {
         display: flex;
         align-items: flex-end;
         &_degrees {
-            width: 21rem;
+            min-width: 21rem;
+            flex: 0 0 auto;
 
             font-size: 15rem;
             font-weight: 600;
             line-height: 0.8;
+            text-align: center;
         }
         &_img {
             width: 8.1rem;
             margin-bottom: 1rem;
             .img {
+                display: block;
                 width: 100%;
+                height: 5rem;
             }
         }
     }
@@ -386,19 +390,17 @@ button {
     &_item {
         display: flex;
         align-items: flex-start;
-        flex-wrap: wrap;
+        flex-direction: column;
         margin-right: 2rem;
         &:last-child {
             margin-right: 0;
         }
         &_day {
-            width: 100%;
-
             font-size: 1.1rem;
             font-weight: 700;
         }
         &_degrees {
-            margin-right: 1rem;
+            margin-right: 0.5rem;
 
             font-size: 4rem;
             font-weight: 600;
@@ -407,8 +409,13 @@ button {
         &_img {
             width: 3.2rem;
             .img {
+                display: block;
                 width: 100%;
+                height: 2.5rem;
             }
+        }
+        &_bottom {
+            display: flex;
         }
     }
 }

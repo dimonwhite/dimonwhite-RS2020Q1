@@ -1,3 +1,4 @@
+import { getNextDay } from '@/utils';
 import ru from '../data/ru.json';
 import en from '../data/en.json';
 import be from '../data/be.json';
@@ -18,13 +19,13 @@ const months = [
 ];
 
 const days = [
+  'sun',
   'mon',
   'tue',
   'wed',
   'thu',
   'fri',
   'sat',
-  'sun',
 ];
 
 export default class DateAndTime {
@@ -35,32 +36,59 @@ export default class DateAndTime {
     this.dayWeekEl = this.dateBlock.querySelector('.dayWeek');
     this.dayMonthEl = this.dateBlock.querySelector('.dayMonth');
     this.monthEl = this.dateBlock.querySelector('.month');
-    this.date = new Date();
     this.ru = ru;
     this.en = en;
     this.be = be;
+    this.nextDays = {
+      one: document.querySelector('.one_day'),
+      two: document.querySelector('.two_day'),
+      three: document.querySelector('.three_day'),
+    };
   }
 
-  init(lang) {
+  init(lang, timezone) {
+    this.date = new Date(new Date().toLocaleString('en-US', { timeZone: 'UTC' }));
     this.lang = lang;
-    this.setDate();
+    this.setDate(timezone);
     this.initTimer();
     document.addEventListener('languageChange', (e) => {
       this.lang = e.detail.dataset.lang;
     });
   }
 
-  setDate() {
-    this.hours = this.date.getHours();
+  setDate(timezone) {
+    this.setTime(timezone);
+    this.setDateText();
+  }
+
+  setTime(timezone) {
+    this.hours = this.date.getHours() + timezone;
     this.minutes = this.date.getMinutes();
     this.seconds = this.date.getSeconds();
+    this.hoursEl.textContent = this.hours;
+    this.minEl.textContent = this.minutes > 9 ? this.minutes : `0${this.minutes}`;
+  }
+
+  setDateText() {
     this.dayWeekEl.textContent = this[this.lang].short[days[this.date.getDay()]];
     this.dayWeekEl.dataset.trs = `short.${days[this.date.getDay()]}`;
     this.monthEl.textContent = this[this.lang].months[months[this.date.getMonth()]];
     this.monthEl.dataset.trs = `months.${months[this.date.getMonth()]}`;
     this.dayMonthEl.textContent = this.date.getDate();
-    this.hoursEl.textContent = this.hours;
-    this.minEl.textContent = this.minutes > 9 ? this.minutes : `0${this.minutes}`;
+    this.setNextDays();
+  }
+
+  setNextDays() {
+    let nextDay = this.date.getDay();
+    nextDay = getNextDay(nextDay);
+    this.nextDays.one.textContent = this[this.lang].full[days[nextDay]];
+    this.nextDays.one.dataset.trs = `full.${days[nextDay]}`;
+    nextDay = getNextDay(nextDay);
+    this.nextDays.two.textContent = this[this.lang].full[days[nextDay]];
+    this.nextDays.two.dataset.trs = `full.${days[nextDay]}`;
+    nextDay = getNextDay(nextDay);
+    this.nextDays.three.textContent = this[this.lang].full[days[nextDay]];
+    this.nextDays.three.dataset.trs = `full.${days[nextDay]}`;
   }
 
   initTimer() {
