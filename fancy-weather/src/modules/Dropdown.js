@@ -19,11 +19,11 @@ export default class Dropdown {
 
   clickDropdownBtn(btn) {
     if (btn && !btn.classList.contains('active')) {
-      this.changeActiveElememnt(btn);
+      this.changeActiveElement(btn);
     }
   }
 
-  changeActiveElememnt(btn) {
+  changeActiveElement(btn) {
     this.dropdownWrap.querySelector('li.active').classList.remove('active');
     btn.classList.add('active');
     this.text.textContent = btn.textContent;

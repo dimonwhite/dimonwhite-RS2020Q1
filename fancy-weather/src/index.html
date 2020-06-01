@@ -10,6 +10,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body class="container">
+    <div class="firstBg"></div>
+    <div class="secondBg"></div>
     <div class="preloaded" id="circularG">
         <div id="circularG_1" class="circularG"></div>
         <div id="circularG_2" class="circularG"></div>
@@ -64,18 +66,18 @@
 
         <section class="app">
             <div class="weather">
-                <div class="weather_city"><span data-info="city"></span>, <span data-info="country"></span></div>
+                <div class="weather_city"><span data-info="city" data-trs="city"></span>, <span data-info="country" data-trs="country"></span></div>
                 <div class="weather_date">
                     <span class="date"><span class="dayWeek" data-trs="short.mon"></span> <span class="dayMonth"></span> <span class="month" data-trs="months.october"></span></span>
                     <span class="time">
-                        <span class="hours"></span>:<span class="minutes"></span>
+                        <span class="hours"></span>:<span class="minutes"></span>:<span class="seconds"></span>
                     </span>
                 </div>
                 <div class="weather_main">
                     <div class="weather_main_degrees degreesNumber" data-weather="degrees">10</div>
                     <div class="weather_info">
                         <div class="weather_main_img" data-img="img"></div>
-                        <div class="weather_text" data-weather="weather">overcast</div>
+                        <div class="weather_text" data-weather="weather" data-trs="weather">overcast</div>
                         <div class="feels">
                             <span class="feels_title" data-trs="feelsLike">Feels like:</span> <span class="degrees degreesNumber" data-weather="feelsLike">7</span>°
                         </div>

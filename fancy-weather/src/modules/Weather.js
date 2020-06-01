@@ -8,6 +8,11 @@ export default class Weather {
   }
 
   changeInfo(info) {
+    this.changeText(info);
+    this.changeImgs(info);
+  }
+
+  changeText(info) {
     this.elements.forEach((el) => {
       const elInfo = el.dataset.weather;
       const path = elInfo.split('.');
@@ -19,7 +24,9 @@ export default class Weather {
         element.textContent = result;
       }
     });
+  }
 
+  changeImgs(info) {
     this.imgs.forEach((el) => {
       const elInfo = el.dataset.img;
       const path = elInfo.split('.');

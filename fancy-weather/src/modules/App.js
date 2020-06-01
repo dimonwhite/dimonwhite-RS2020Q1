@@ -22,7 +22,7 @@ export default class App {
       two: {},
       three: {},
     };
-    this.translate = new Translate();
+    this.translate = new Translate(this);
     this.ymaps = window.ymaps;
   }
 
@@ -36,6 +36,11 @@ export default class App {
     this.getCity();
     this.createMap();
     App.changeRadioDegrees();
+    this.addListeners();
+    this.dropdown.changeActiveElement(document.querySelector(`[data-lang=${this.lang}]`));
+  }
+
+  addListeners() {
     document.querySelector('.header .update')
       .addEventListener('click', () => {
         this.changeImage();
@@ -45,20 +50,32 @@ export default class App {
         weather.changeDegrees(e.target.value);
       });
     });
+    document.querySelector('.header_form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      this.city = e.target.querySelector('.search').value;
+      this.getInfo();
+    });
   }
 
   getCity() {
     fetchJSON(ipinfo)
       .then((data) => {
-        this.getInfo(data.city);
+        this.city = data.city;
+        this.getInfo();
       });
   }
 
-  getInfo(city) {
-    fetchJSON(`${opencagedata}&q=${city}&language=${this.lang}`)
+  requestCityInfo() {
+    return fetchJSON(`${opencagedata}&q=${this.city}&language=${this.lang}`);
+  }
+
+  getInfo() {
+    this.requestCityInfo()
       .then((data) => {
         const info = data.results[0];
-        this.info.city = info.components.city;
+        // eslint-disable-next-line no-underscore-dangle
+        const type = info.components._type;
+        this.info.city = info.components.hamlet || info.components[type];
         this.info.country = info.components.country;
         this.fullLat = info.geometry.lat;
         this.fullLng = info.geometry.lng;
@@ -70,12 +87,15 @@ export default class App {
       });
   }
 
+  requestWeatherInfo() {
+    return fetchJSON(`${weatherAPI}&lat=${this.fullLat}&lon=${this.fullLng}&lang=${this.lang}`);
+  }
+
   getWeather() {
-    fetchJSON(`${weatherAPI}&lat=${this.fullLat}&lon=${this.fullLng}&lang=${this.lang}`)
+    this.requestWeatherInfo()
       .then((data) => {
         this.setWeatherInfo(data);
         infoClass.changeInfo(this.info);
-        this.dropdown.changeActiveElememnt(document.querySelector(`[data-lang=${this.lang}]`));
         date.init(this.lang, this.timezone);
         this.changeImage();
         document.body.classList.add('active');

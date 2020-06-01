@@ -33,6 +33,7 @@ export default class DateAndTime {
     this.dateBlock = document.querySelector('.weather_date');
     this.hoursEl = this.dateBlock.querySelector('.hours');
     this.minEl = this.dateBlock.querySelector('.minutes');
+    this.secEl = this.dateBlock.querySelector('.seconds');
     this.dayWeekEl = this.dateBlock.querySelector('.dayWeek');
     this.dayMonthEl = this.dateBlock.querySelector('.dayMonth');
     this.monthEl = this.dateBlock.querySelector('.month');
@@ -57,12 +58,20 @@ export default class DateAndTime {
   }
 
   setDate(timezone) {
-    this.setTime(timezone);
+    this.hours = this.date.getHours() + timezone;
+    if (this.hours >= 24) {
+      this.hours -= 24;
+      this.date.setDate(this.date.getDate() + 1);
+    }
+    if (this.hours < 0) {
+      this.hours += 24;
+      this.date.setDate(this.date.getDate() - 1);
+    }
+    this.setTime();
     this.setDateText();
   }
 
-  setTime(timezone) {
-    this.hours = this.date.getHours() + timezone;
+  setTime() {
     this.minutes = this.date.getMinutes();
     this.seconds = this.date.getSeconds();
     this.hoursEl.textContent = this.hours;
@@ -92,8 +101,12 @@ export default class DateAndTime {
   }
 
   initTimer() {
-    setInterval(() => {
+    if (this.timer) {
+      clearInterval(this.timer);
+    }
+    this.timer = setInterval(() => {
       this.seconds += 1;
+      this.secEl.textContent = this.seconds;
       if (this.seconds >= 60) {
         this.changeMinutes();
       }
