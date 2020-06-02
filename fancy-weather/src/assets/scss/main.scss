@@ -14,6 +14,9 @@ html {
     height: 100%;
 
     font-size: 1.39vw;
+    @include media(1024px) {
+        font-size: 20px;
+    }
 }
 
 body {
@@ -80,13 +83,10 @@ body {
 
 .container {
     padding: 0 calc(50% - 31.5rem);
-    @include media(1480px) {
-        padding: 0 40px;
-    }
-    @include media(900px) {
+    @include media(1024px) {
         padding: 0 20px;
     }
-    @include media(460px) {
+    @include media(630px) {
         padding: 0 10px;
     }
 }
@@ -105,6 +105,11 @@ button {
     align-items: center;
     padding-top: 2rem;
     margin-bottom: 2rem;
+    @include media(630px) {
+        flex-direction: column-reverse;
+        padding-top: 1rem;
+        margin-bottom: 1.5rem;
+    }
     &_btns {
         display: flex;
     }
@@ -116,6 +121,9 @@ button {
     }
     &_form {
         display: flex;
+        @include media(630px) {
+            margin-bottom: 1rem;
+        }
     }
 }
 
@@ -286,6 +294,11 @@ button {
     background-color: rgba(76, 82, 85, 0.4);
     border: 1px solid rgba(228, 227, 227, 0.2);
     border-radius: 0.2rem 0 0 0.2rem;
+    @include media(400px) {
+        width: 11rem;
+
+        font-size: 0.6rem;
+    }
     &::placeholder {
         font-weight: 200;
         color: #ffffff;
@@ -329,6 +342,11 @@ button {
     background-color: rgba(174, 181, 185, 0.5);
     border-radius: 0 0.2rem 0.2rem 0;
     border: 0;
+    @include media(400px) {
+        width: 3.5rem;
+
+        font-size: 0.6rem;
+    }
 }
 
 .svg {
@@ -341,21 +359,37 @@ button {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
+    @include media(1024px) {
+        flex-direction: column;
+        align-items: center;
+        padding-bottom: 1.5rem;
+    }
     &_right {
         width: 29.8%;
         display: flex;
         align-items: flex-end;
         flex-direction: column;
+        max-width: 100%;
 
         font-size: 1rem;
         font-weight: 600;
         text-align: right;
+        @include media(1024px) {
+            width: auto;
+        }
         .map {
             width: 100%;
             height: 20rem;
             margin-bottom: 1rem;
 
             clip-path: url(#my-clip-path);
+            @include media(1024px) {
+                width: 22rem;
+                max-width: 100%;
+            }
+            @include media(400px) {
+                height: 15rem;
+            }
         }
     }
 }
@@ -370,6 +404,17 @@ button {
 
 .weather {
     max-width: 65%;
+    @include media(1024px) {
+        width: 100%;
+        margin-bottom: 2rem;
+        max-width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    @include media(630px) {
+        text-align: center;
+    }
     &_city {
         font-size: 2.2rem;
         font-weight: 700;
@@ -381,10 +426,21 @@ button {
 
         font-size: 1.2rem;
         font-weight: 600;
+        .date {
+            margin-right: 0.8rem;
+        }
     }
     &_main {
         display: flex;
         align-items: flex-end;
+        @include media(1024px) {
+            align-items: center;
+            width: 90%;
+        }
+        @include media(630px) {
+            flex-direction: column;
+            width: 100%;
+        }
         &_degrees {
             min-width: 21rem;
             flex: 0 0 auto;
@@ -393,6 +449,17 @@ button {
             font-weight: 600;
             line-height: 0.8;
             text-align: center;
+            @include media(1024px) {
+                min-width: 50%;
+
+                font-size: 10rem;
+            }
+            @include media(630px) {
+                width: 100%;
+            }
+            @include media(400px) {
+                font-size: 8rem;
+            }
         }
         &_img {
             width: 8.1rem;
@@ -408,6 +475,13 @@ button {
         font-size: 1.1rem;
         font-weight: 700;
         text-transform: uppercase;
+        @include media(630px) {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            text-align: center;
+        }
     }
 }
 
@@ -415,17 +489,31 @@ button {
     display: flex;
     align-items: flex-start;
     padding-top: 2.5rem;
+    @include media(630px) {
+        flex-direction: column;
+        padding-top: 1.5rem;
+    }
     &_item {
         display: flex;
         align-items: flex-start;
         flex-direction: column;
         margin-right: 2rem;
+        @include media(630px) {
+            margin-right: 0;
+            margin-bottom: 1rem;
+        }
         &:last-child {
             margin-right: 0;
+            @include media(630px) {
+                margin-bottom: 0;
+            }
         }
         &_day {
             font-size: 1.1rem;
             font-weight: 700;
+            @include media(630px) {
+                font-size: 2rem;
+            }
         }
         &_degrees {
             margin-right: 0.5rem;
@@ -433,6 +521,12 @@ button {
             font-size: 4rem;
             font-weight: 600;
             line-height: 1;
+            @include media(1024px) {
+                font-size: 2rem;
+            }
+            @include media(630px) {
+                font-size: 4.5rem;
+            }
         }
         &_img {
             width: 3.2rem;

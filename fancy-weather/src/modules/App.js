@@ -75,7 +75,7 @@ export default class App {
         const info = data.results[0];
         // eslint-disable-next-line no-underscore-dangle
         const type = info.components._type;
-        this.info.city = info.components.hamlet || info.components[type];
+        this.info.city = info.components.hamlet || info.components[type] || info.components.county;
         this.info.country = info.components.country;
         this.fullLat = info.geometry.lat;
         this.fullLng = info.geometry.lng;
@@ -113,7 +113,8 @@ export default class App {
     fetchJSON(`${weatherAPI}&lat=${this.fullLat}&lon=${this.fullLng}&lang=en`)
       .then((data) => {
         const timesOfDay = getTimesOfDay(date.hours);
-        generateImage(`${data.current.weather[0].description} ${timesOfDay}`);
+        console.log(data, timesOfDay, generateImage);
+        // generateImage(`${data.current.weather[0].description} ${timesOfDay}`);
       });
   }
 

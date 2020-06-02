@@ -106,15 +106,15 @@ export default class DateAndTime {
     }
     this.timer = setInterval(() => {
       this.seconds += 1;
-      this.secEl.textContent = this.seconds;
       if (this.seconds >= 60) {
+        this.seconds = 0;
         this.changeMinutes();
       }
+      this.secEl.textContent = this.seconds < 10 ? `0${this.seconds}` : this.seconds;
     }, 1000);
   }
 
   changeMinutes() {
-    this.seconds = 0;
     this.minutes += 1;
     if (this.minutes >= 60) {
       this.changeHours();
