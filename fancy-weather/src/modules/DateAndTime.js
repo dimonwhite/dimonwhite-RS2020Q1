@@ -79,10 +79,12 @@ export default class DateAndTime {
   }
 
   setDateText() {
-    this.dayWeekEl.textContent = this[this.lang].short[days[this.date.getDay()]];
-    this.dayWeekEl.dataset.trs = `short.${days[this.date.getDay()]}`;
-    this.monthEl.textContent = this[this.lang].months[months[this.date.getMonth()]];
-    this.monthEl.dataset.trs = `months.${months[this.date.getMonth()]}`;
+    this.month = this.date.getMonth();
+    this.day = this.date.getDay();
+    this.dayWeekEl.textContent = this[this.lang].short[days[this.day]];
+    this.dayWeekEl.dataset.trs = `short.${days[this.day]}`;
+    this.monthEl.textContent = this[this.lang].months[months[this.month]];
+    this.monthEl.dataset.trs = `months.${months[this.month]}`;
     this.dayMonthEl.textContent = this.date.getDate();
     this.setNextDays();
   }

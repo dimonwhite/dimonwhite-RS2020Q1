@@ -1,7 +1,7 @@
 import { ipinfo, opencagedata, weatherAPI } from '@/constants';
-import generateImage from '@modules/generateImage';
+import ImageBg from '@modules/ImageBg';
 import {
-  fetchJSON, getTimesOfDay, changeGeometry, objectAverage,
+  fetchJSON, getTimesOfDay, changeGeometry, objectAverage, getSeason,
 } from '@/utils';
 import Translate from '@modules/Translate';
 import Dropdown from '@modules/Dropdown';
@@ -9,6 +9,7 @@ import Map from '@modules/Map';
 import Info from '@modules/Info';
 import DateAndTime from '@modules/DateAndTime';
 import Weather from '@modules/Weather';
+import Error from '@modules/Error';
 
 const infoClass = new Info();
 const date = new DateAndTime();
@@ -24,6 +25,8 @@ export default class App {
     };
     this.translate = new Translate(this);
     this.ymaps = window.ymaps;
+    this.error = new Error();
+    this.image = new ImageBg(this.error, 600);
   }
 
   init() {
@@ -38,6 +41,7 @@ export default class App {
     App.changeRadioDegrees();
     this.addListeners();
     this.dropdown.changeActiveElement(document.querySelector(`[data-lang=${this.lang}]`));
+    this.error.init();
   }
 
   addListeners() {
@@ -72,19 +76,31 @@ export default class App {
   getInfo() {
     this.requestCityInfo()
       .then((data) => {
-        const info = data.results[0];
-        // eslint-disable-next-line no-underscore-dangle
-        const type = info.components._type;
-        this.info.city = info.components.hamlet || info.components[type] || info.components.county;
-        this.info.country = info.components.country;
-        this.fullLat = info.geometry.lat;
-        this.fullLng = info.geometry.lng;
-        this.info.lat = changeGeometry(String(info.geometry.lat));
-        this.info.lng = changeGeometry(String(info.geometry.lng));
-        this.timezone = info.annotations.timezone.offset_sec / 3600;
-        this.getWeather();
-        this.map.setCenter(this.fullLat, this.fullLng);
+        if (data.total_results > 0) {
+          this.setInfo(data);
+        } else {
+          this.showError('Неверные данные');
+        }
       });
+  }
+
+  setInfo(data) {
+    const info = data.results[0];
+    // eslint-disable-next-line no-underscore-dangle
+    const type = info.components._type;
+    this.info.city = info.components.hamlet || info.components[type] || info.components.county;
+    this.info.country = info.components.country;
+    this.fullLat = info.geometry.lat;
+    this.fullLng = info.geometry.lng;
+    this.info.lat = changeGeometry(String(info.geometry.lat));
+    this.info.lng = changeGeometry(String(info.geometry.lng));
+    this.timezone = info.annotations.timezone.offset_sec / 3600;
+    this.getWeather();
+    this.map.setCenter(this.fullLat, this.fullLng);
+  }
+
+  showError(text) {
+    this.error.showError(text);
   }
 
   requestWeatherInfo() {
@@ -110,12 +126,9 @@ export default class App {
   }
 
   changeImage() {
-    fetchJSON(`${weatherAPI}&lat=${this.fullLat}&lon=${this.fullLng}&lang=en`)
-      .then((data) => {
-        const timesOfDay = getTimesOfDay(date.hours);
-        console.log(data, timesOfDay, generateImage);
-        // generateImage(`${data.current.weather[0].description} ${timesOfDay}`);
-      });
+    const timesOfDay = getTimesOfDay(date.hours);
+    const season = getSeason(date.month);
+    this.image.getImage(`${season} ${timesOfDay}`);
   }
 
   setWeatherInfo(data) {

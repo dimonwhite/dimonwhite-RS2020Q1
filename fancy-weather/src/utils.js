@@ -46,7 +46,26 @@ const getResult = (path, res) => {
   return result;
 };
 
+const getSeason = (month) => {
+  let season;
+  switch (true) {
+    case (month >= 2 && month <= 4):
+      season = 'spring';
+      break;
+    case (month >= 5 && month <= 7):
+      season = 'summer';
+      break;
+    case (month >= 8 && month <= 10):
+      season = 'autumn';
+      break;
+    default:
+      season = 'winter';
+      break;
+  }
+  return season;
+};
+
 export {
   fetchJSON, getTimesOfDay, changeGeometry, objectAverage,
-  getNextDay, celToFah, fahToCel, getResult,
+  getNextDay, celToFah, fahToCel, getResult, getSeason,
 };
