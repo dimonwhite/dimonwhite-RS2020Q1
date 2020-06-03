@@ -1,10 +1,12 @@
 import { celToFah, fahToCel, getResult } from '@/utils';
+import ImageWeather from '@modules/ImgWeather';
 
 export default class Weather {
   constructor() {
     this.elements = document.querySelectorAll('[data-weather]');
     this.imgs = document.querySelectorAll('[data-img]');
     this.degreesFormat = localStorage.getItem('degreesFormat') || 'cel';
+    this.imageWeather = new ImageWeather();
   }
 
   changeInfo(info) {
@@ -32,11 +34,14 @@ export default class Weather {
       const path = elInfo.split('.');
       const result = getResult(path, info);
       const element = el;
-      element.innerHTML = `
-        <svg class="img">
-            <use xlink:href="sprite.svg#icon${result.slice(0, -1)}"></use>
-        </svg>
-      `;
+      const nameImg = `icon${result.slice(0, -1)}`;
+      if (element.classList.contains('weather_main_img')) {
+        element.setAttribute('class', 'weather_main_img');
+      } else {
+        element.setAttribute('class', 'briefly_item_img');
+      }
+      element.classList.add(nameImg);
+      element.innerHTML = this.imageWeather.generateImg(nameImg);
     });
   }
 

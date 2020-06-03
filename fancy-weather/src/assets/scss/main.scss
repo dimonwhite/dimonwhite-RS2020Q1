@@ -1,6 +1,7 @@
 @import "~normalize.css";
 @import "settings/mixins";
 @import "settings/preloader";
+@import "settings/keyframes";
 
 * , *:before, *:after {
     box-sizing: border-box;
@@ -464,11 +465,8 @@ button {
         &_img {
             width: 8.1rem;
             margin-bottom: 1rem;
-            .img {
-                display: block;
-                width: 100%;
-                height: 5rem;
-            }
+
+            font-size: 1rem;
         }
     }
     &_info {
@@ -530,14 +528,12 @@ button {
         }
         &_img {
             width: 3.2rem;
-            .img {
-                display: block;
-                width: 100%;
-                height: 2.5rem;
-            }
+
+            font-size: 0.5rem;
         }
         &_bottom {
             display: flex;
+            align-items: flex-start;
         }
     }
 }
@@ -598,4 +594,163 @@ $red: #f8aeae;
         }
     }
 }
+
+.icon01,
+.icon02,
+.icon03,
+.icon04,
+.icon09,
+.icon10,
+.icon11,
+.icon13,
+.icon50 {
+    position: relative;
+    .svg_icon {
+        position: relative;
+        z-index: 1;
+
+        display: block;
+        width: 100%;
+        height: 5em;
+    }
+}
+
+.icon01 {
+    .sun {
+        animation: 6s linear 0s infinite backwards rotate;
+    }
+}
+
+.icon02, .icon10 {
+    .sun {
+        position: absolute;
+        top: -0.8em;
+        right: 0;
+        z-index: 0;
+
+        width: 4.5em;
+        height: 4.5em;
+
+        animation: 6s linear 0s infinite backwards rotate;
+    }
+}
+
+.icon03 {
+    .cloud {
+        animation: 4s linear 0s infinite moving;
+    }
+}
+
+.icon04, .icon09, .icon11 {
+    .cloud {
+        animation: 4s linear 0s infinite moving;
+    }
+    .darkcloud {
+        position: absolute;
+        top: -1em;
+        right: 0;
+        z-index: 0;
+
+        animation: 4s linear 0s infinite reverse moving;
+    }
+}
+
+.icon09, .icon10 {
+    .drop {
+        position: absolute;
+        left: 1em;
+        bottom: -0.5em;
+
+        width: 1.5em;
+        height: 2em;
+
+        animation: 3s linear 0s infinite reverse movingVertical;
+        &:last-child {
+            left: auto;
+            right: 1em;
+            animation: 3s linear 1s infinite reverse movingVertical;
+        }
+        &:nth-last-child(2) {
+            left: auto;
+            right: 3.4em;
+            animation: 3s linear 0.5s infinite reverse movingVertical;
+        }
+    }
+    &.briefly_item_img {
+        .drop:nth-last-child(2) {
+            right: 2.5em;
+        }
+    }
+}
+
+.icon11 {
+    .lightning {
+        position: absolute;
+        left: 1em;
+        bottom: -0.5em;
+
+        width: 2em;
+        height: 3em;
+
+        animation: 3s linear 0s infinite reverse movingVertical;
+    }
+}
+
+.icon13 {
+    .snow {
+        position: absolute;
+        left: 1em;
+        bottom: -0.5em;
+
+        width: 1.5em;
+        height: 2em;
+
+        animation: 3s linear 0s infinite reverse movingVertical;
+        &:last-child {
+            left: auto;
+            right: 1em;
+            animation: 3s linear 1s infinite reverse movingVertical;
+        }
+        &:nth-last-child(2) {
+            left: auto;
+            right: 3.4em;
+            animation: 3s linear 0.5s infinite reverse movingVertical;
+        }
+    }
+    &.briefly_item_img {
+        .snow:nth-last-child(2) {
+            right: 2.5em;
+        }
+    }
+}
+
+.icon50 {
+    .line {
+        position: absolute;
+        bottom: -0.5em;
+        left: 0;
+
+        width: 100%;
+        height: 0.4em;
+
+        animation: 4s linear 0s infinite reverse moving;
+        &:nth-last-child(3) {
+            bottom: 0.2em;
+            animation: 4s linear 0s infinite moving;
+        }
+        &:nth-last-child(2) {
+            bottom: 0.9em;
+        }
+        &:last-child {
+            bottom: 1.6em;
+            animation: 4s linear 0s infinite moving;
+        }
+    }
+    &.briefly_item_img {
+        .line {
+            height: 0.3em;
+        }
+    }
+}
+
 

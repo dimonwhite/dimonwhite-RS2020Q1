@@ -1,0 +1,44 @@
+@keyframes rotate {
+    from {
+        transform: rotate(0);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes moving {
+    from {
+        left: 0;
+    }
+    25% {
+        left: -1em;
+    }
+    50% {
+        left: 0;
+    }
+    75% {
+        left: 1em;
+    }
+    to {
+        left: 0;
+    }
+}
+
+@keyframes movingVertical {
+    from {
+        bottom: -0.5em;
+    }
+    25% {
+        bottom: -1.5em;
+    }
+    50% {
+        bottom: -0.5em;
+    }
+    75% {
+        bottom: -1.5em;
+    }
+    to {
+        bottom: -0.5em;
+    }
+}
