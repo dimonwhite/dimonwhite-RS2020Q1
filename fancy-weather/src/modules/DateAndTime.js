@@ -76,6 +76,7 @@ export default class DateAndTime {
     this.seconds = this.date.getSeconds();
     this.hoursEl.textContent = this.hours;
     this.minEl.textContent = this.minutes > 9 ? this.minutes : `0${this.minutes}`;
+    this.secEl.textContent = this.seconds > 9 ? this.seconds : `0${this.seconds}`;
   }
 
   setDateText() {
@@ -112,7 +113,7 @@ export default class DateAndTime {
         this.seconds = 0;
         this.changeMinutes();
       }
-      this.secEl.textContent = this.seconds < 10 ? `0${this.seconds}` : this.seconds;
+      this.secEl.textContent = this.seconds > 9 ? this.seconds : `0${this.seconds}`;
     }, 1000);
   }
 

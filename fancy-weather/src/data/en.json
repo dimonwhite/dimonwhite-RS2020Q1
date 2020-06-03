@@ -38,5 +38,10 @@
     "october": "October",
     "november": "November",
     "december": "December"
+  },
+  "speak": {
+    "speakStart": "Weather for today",
+    "degrees": "degrees",
+    "feelsLike": "feels like"
   }
 }

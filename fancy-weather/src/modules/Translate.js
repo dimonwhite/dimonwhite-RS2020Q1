@@ -42,6 +42,7 @@ export default class Translate {
         this[this.lang].country = info.components.country;
         const { current } = data[1];
         this[this.lang].weather = current.weather[0].description;
+        this.app.weather.weather = current.weather[0].description;
         this.changeElements();
       });
   }

@@ -38,5 +38,10 @@
     "october": "Октябрь",
     "november": "Ноябрь",
     "december": "Декабрь"
+  },
+  "speak": {
+    "speakStart": "Погода на сегодня",
+    "degrees": "градусов",
+    "feelsLike": "ощущается как"
   }
 }

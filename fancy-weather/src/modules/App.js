@@ -10,6 +10,7 @@ import Info from '@modules/Info';
 import DateAndTime from '@modules/DateAndTime';
 import Weather from '@modules/Weather';
 import Error from '@modules/Error';
+import Speak from '@modules/Speak';
 
 const infoClass = new Info();
 const date = new DateAndTime();
@@ -27,6 +28,7 @@ export default class App {
     this.ymaps = window.ymaps;
     this.error = new Error();
     this.image = new ImageBg(this.error, 600);
+    this.speak = new Speak();
   }
 
   init() {
@@ -58,6 +60,9 @@ export default class App {
       e.preventDefault();
       this.city = e.target.querySelector('.search').value;
       this.getInfo();
+    });
+    document.querySelector('.play').addEventListener('click', () => {
+      this.speak.make(this.lang, this.weather);
     });
   }
 
