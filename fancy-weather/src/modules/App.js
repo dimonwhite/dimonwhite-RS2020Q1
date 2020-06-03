@@ -11,6 +11,7 @@ import DateAndTime from '@modules/DateAndTime';
 import Weather from '@modules/Weather';
 import Error from '@modules/Error';
 import Speak from '@modules/Speak';
+import Speech from '@modules/Speech';
 
 const infoClass = new Info();
 const date = new DateAndTime();
@@ -29,6 +30,8 @@ export default class App {
     this.error = new Error();
     this.image = new ImageBg(this.error, 600);
     this.speak = new Speak();
+    this.speech = new Speech(this);
+    this.preloaded = document.querySelector('.preloaded');
   }
 
   init() {
@@ -44,6 +47,7 @@ export default class App {
     this.addListeners();
     this.dropdown.changeActiveElement(document.querySelector(`[data-lang=${this.lang}]`));
     this.error.init();
+    this.speech.init();
   }
 
   addListeners() {
@@ -79,6 +83,7 @@ export default class App {
   }
 
   getInfo() {
+    this.startPreloaded();
     this.requestCityInfo()
       .then((data) => {
         if (data.total_results > 0) {
@@ -101,7 +106,6 @@ export default class App {
     this.info.lng = changeGeometry(String(info.geometry.lng));
     this.timezone = info.annotations.timezone.offset_sec / 3600;
     this.getWeather();
-    this.map.setCenter(this.fullLat, this.fullLng);
   }
 
   showError(text) {
@@ -120,6 +124,8 @@ export default class App {
         date.init(this.lang, this.timezone);
         this.changeImage();
         document.body.classList.add('active');
+        this.map.setCenter(this.fullLat, this.fullLng);
+        this.stopPreloaded();
       });
   }
 
@@ -153,5 +159,13 @@ export default class App {
 
   static changeRadioDegrees() {
     document.querySelector(`[value="${weather.degreesFormat}"]`).checked = true;
+  }
+
+  startPreloaded() {
+    this.preloaded.classList.add('active');
+  }
+
+  stopPreloaded() {
+    this.preloaded.classList.remove('active');
   }
 }
