@@ -35,10 +35,15 @@ export default class Translate {
     ])
       .then((data) => {
         const info = data[0].results[0];
-        // eslint-disable-next-line no-underscore-dangle
-        const type = info.components._type;
-        this[this.lang].city = info.components.hamlet || info.components[type]
-          || info.components.county;
+        this[this.lang].city = '';
+        this[this.lang].city = info.components.hamlet || info.components.village
+            || info.components.city || info.components.county || info.components.neighbourhood
+            || info.components.state || info.components.region;
+        if (!this[this.lang].city) {
+          // eslint-disable-next-line no-underscore-dangle
+          const type = info.components._type;
+          this[this.lang].city = info.components[type];
+        }
         this[this.lang].country = info.components.country;
         const { current } = data[1];
         this[this.lang].weather = current.weather[0].description;

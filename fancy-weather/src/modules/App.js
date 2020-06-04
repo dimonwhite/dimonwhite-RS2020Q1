@@ -10,8 +10,8 @@ import Info from '@modules/Info';
 import DateAndTime from '@modules/DateAndTime';
 import Weather from '@modules/Weather';
 import Error from '@modules/Error';
+import Listen from '@modules/Listen';
 import Speak from '@modules/Speak';
-import Speech from '@modules/Speech';
 
 const infoClass = new Info();
 const date = new DateAndTime();
@@ -29,8 +29,8 @@ export default class App {
     this.ymaps = window.ymaps;
     this.error = new Error();
     this.image = new ImageBg(this.error, 600);
-    this.speak = new Speak();
-    this.speech = new Speech(this);
+    this.listen = new Listen(weather);
+    this.Speak = new Speak(this);
     this.preloaded = document.querySelector('.preloaded');
   }
 
@@ -47,7 +47,7 @@ export default class App {
     this.addListeners();
     this.dropdown.changeActiveElement(document.querySelector(`[data-lang=${this.lang}]`));
     this.error.init();
-    this.speech.init();
+    this.Speak.init();
   }
 
   addListeners() {
@@ -66,7 +66,7 @@ export default class App {
       this.getInfo();
     });
     document.querySelector('.play').addEventListener('click', () => {
-      this.speak.make(this.lang, this.weather);
+      this.listen.make(this.lang, this.weather);
     });
   }
 
@@ -96,9 +96,14 @@ export default class App {
 
   setInfo(data) {
     const info = data.results[0];
-    // eslint-disable-next-line no-underscore-dangle
-    const type = info.components._type;
-    this.info.city = info.components.hamlet || info.components[type] || info.components.county;
+    this.info.city = info.components.hamlet || info.components.village
+      || info.components.city || info.components.county || info.components.neighbourhood
+      || info.components.state || info.components.region;
+    if (!this.info.city) {
+      // eslint-disable-next-line no-underscore-dangle
+      const type = info.components._type;
+      this.info.city = info.components[type];
+    }
     this.info.country = info.components.country;
     this.fullLat = info.geometry.lat;
     this.fullLng = info.geometry.lng;
@@ -139,7 +144,8 @@ export default class App {
   changeImage() {
     const timesOfDay = getTimesOfDay(date.hours);
     const season = getSeason(date.month);
-    this.image.getImage(`${season} ${timesOfDay}`);
+    console.log(this, season, timesOfDay);
+    // this.image.getImage(`${timesOfDay},${season}`);
   }
 
   setWeatherInfo(data) {

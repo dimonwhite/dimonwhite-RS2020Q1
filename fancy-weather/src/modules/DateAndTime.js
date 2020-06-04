@@ -51,6 +51,7 @@ export default class DateAndTime {
     this.date = new Date(new Date().toLocaleString('en-US', { timeZone: 'UTC' }));
     this.lang = lang;
     this.setDate(timezone);
+    console.log(timezone);
     this.initTimer();
     document.addEventListener('languageChange', (e) => {
       this.lang = e.detail.dataset.lang;
@@ -58,6 +59,7 @@ export default class DateAndTime {
   }
 
   setDate(timezone) {
+    this.timezone = timezone;
     this.hours = this.date.getHours() + timezone;
     if (this.hours >= 24) {
       this.hours -= 24;
@@ -129,8 +131,8 @@ export default class DateAndTime {
   changeHours() {
     this.hours += 1;
     if (this.hours >= 24) {
-      this.date = new Date();
-      this.setDate();
+      this.date = new Date(new Date().toLocaleString('en-US', { timeZone: 'UTC' }));
+      this.setDate(this.timezone);
     } else {
       this.hoursEl.textContent = this.hours;
     }
