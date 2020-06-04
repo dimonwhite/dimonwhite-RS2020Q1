@@ -39,9 +39,13 @@
     "november": "November",
     "december": "December"
   },
-  "speak": {
+  "listen": {
     "speakStart": "Weather for today",
     "degrees": "degrees",
-    "feelsLike": "feels like"
-  }
+    "feelsLike": "feels like",
+    "maxVolume": "Maximum volume",
+    "minVolume": "The sound is already turned off",
+    "volume": "Volume"
+  },
+  "speakText": "Code phrases: \"play\", \"Increase volume\", \"Decrease volume\""
 }

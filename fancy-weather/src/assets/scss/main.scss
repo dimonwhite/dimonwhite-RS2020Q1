@@ -585,8 +585,9 @@ button {
 }
 
 $red: #f8aeae;
+$green: #5ef87a;
 
-.error {
+.popup {
     position: absolute;
     top: 0;
     left: 50%;
@@ -594,14 +595,18 @@ $red: #f8aeae;
 
     padding: 0.5rem 3rem 0.5rem 1rem;
     min-height: 1rem;
+    max-width: 100%;
 
-    color: $red;
+    color: $green;
 
     border-radius: 0 0 0.3rem 0.3rem;
     background-color: $grey;
     transform: translate(-50%, -100%);
 
     transition: transform 0.6s;
+    &.error {
+        color: $red;
+    }
     @include media(630px) {
         padding: 0.3rem 2rem 0.3rem 0.5rem;
 

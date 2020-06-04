@@ -1,3 +1,7 @@
+import ru from '../data/ru.json';
+import en from '../data/en.json';
+import be from '../data/be.json';
+
 export default class Speak {
   constructor(app) {
     this.app = app;
@@ -7,28 +11,36 @@ export default class Speak {
     this.recognition = new this.MySpeechRecognition();
     this.start = false;
     this.input = document.querySelector('.search');
+    this.ru = ru;
+    this.en = en;
+    this.be = be;
   }
 
   init() {
     this.recognition.continuous = true;
-    this.recognition.interimResults = true;
+    this.recognition.interimResults = false;
     this.recognition.addEventListener('result', (e) => {
-      this.resultRecognition(e.results[0]);
+      const i = e.resultIndex;
+      this.resultRecognition(e.results[i][0].transcript.trim());
     });
     this.btn.addEventListener('click', () => {
       this.clickStartBtn();
     });
     this.recognition.addEventListener('start', () => {
+      this.start = true;
       this.btn.classList.add('active');
     });
     this.recognition.addEventListener('end', () => {
+      this.start = false;
       this.btn.classList.remove('active');
     });
   }
 
   resultRecognition(result) {
-    if (result.isFinal) {
-      this.sendCity(result[0].transcript);
+    if (Speak.isControl(result)) {
+      this.controlListen(result);
+    } else {
+      this.sendCity(result);
     }
   }
 
@@ -37,16 +49,15 @@ export default class Speak {
       this.stopRecognition();
     } else {
       this.startRecognition();
+      this.app.popup.showInfo(this[this.app.lang].speakText);
     }
   }
 
   stopRecognition() {
-    this.start = false;
     this.recognition.stop();
   }
 
   startRecognition() {
-    this.start = true;
     this.recognition.lang = this.app.lang === 'en' ? 'en-US' : 'ru-RU';
     this.recognition.start();
   }
@@ -56,5 +67,35 @@ export default class Speak {
     this.app.city = city;
     this.app.getInfo();
     this.stopRecognition();
+  }
+
+  static isControl(command) {
+    return command.toLowerCase() === 'play' || command.toLowerCase() === 'прослушать'
+        || command.toLowerCase() === 'decrease volume' || command.toLowerCase() === 'уменьшить громкость'
+        || command.toLowerCase() === 'increase volume' || command.toLowerCase() === 'увеличить громкость';
+  }
+
+  controlListen(command) {
+    switch (command.toLowerCase()) {
+      case 'play':
+      case 'прослушать':
+        this.listenWeather();
+        break;
+      case 'decrease volume':
+      case 'уменьшить громкость':
+        this.app.listen.changeVolume(-0.1);
+        break;
+      case 'increase volume':
+      case 'увеличить громкость':
+        this.app.listen.changeVolume(+0.1);
+        break;
+      default:
+        break;
+    }
+  }
+
+  listenWeather() {
+    this.stopRecognition();
+    this.app.listen.make(this.app.lang, this.app.weather);
   }
 }

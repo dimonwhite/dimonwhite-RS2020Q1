@@ -9,7 +9,7 @@ import Map from '@modules/Map';
 import Info from '@modules/Info';
 import DateAndTime from '@modules/DateAndTime';
 import Weather from '@modules/Weather';
-import Error from '@modules/Error';
+import Popup from '@modules/Popup';
 import Listen from '@modules/Listen';
 import Speak from '@modules/Speak';
 
@@ -27,9 +27,9 @@ export default class App {
     };
     this.translate = new Translate(this);
     this.ymaps = window.ymaps;
-    this.error = new Error();
-    this.image = new ImageBg(this.error, 600);
-    this.listen = new Listen(weather);
+    this.popup = new Popup();
+    this.image = new ImageBg(this.popup, 600);
+    this.listen = new Listen(this, weather);
     this.Speak = new Speak(this);
     this.preloaded = document.querySelector('.preloaded');
   }
@@ -46,7 +46,7 @@ export default class App {
     App.changeRadioDegrees();
     this.addListeners();
     this.dropdown.changeActiveElement(document.querySelector(`[data-lang=${this.lang}]`));
-    this.error.init();
+    this.popup.init();
     this.Speak.init();
   }
 
@@ -95,6 +95,7 @@ export default class App {
           this.setInfo(data);
         } else {
           this.showError('Неверные данные');
+          this.stopPreloaded();
         }
       });
   }
@@ -119,7 +120,7 @@ export default class App {
   }
 
   showError(text) {
-    this.error.showError(text);
+    this.popup.showError(text);
   }
 
   requestWeatherInfo() {
@@ -149,7 +150,8 @@ export default class App {
   changeImage() {
     const timesOfDay = getTimesOfDay(date.hours);
     const season = getSeason(date.month);
-    this.image.getImage(`${timesOfDay},${season}`);
+    console.log(season, timesOfDay, this);
+    // this.image.getImage(`${timesOfDay},${season}`);
   }
 
   setWeatherInfo(data) {
