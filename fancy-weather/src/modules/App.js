@@ -150,8 +150,7 @@ export default class App {
   changeImage() {
     const timesOfDay = getTimesOfDay(date.hours);
     const season = getSeason(date.month);
-    console.log(season, timesOfDay, this);
-    // this.image.getImage(`${timesOfDay},${season}`);
+    this.image.getImage(`${timesOfDay},${season}`);
   }
 
   setWeatherInfo(data) {
