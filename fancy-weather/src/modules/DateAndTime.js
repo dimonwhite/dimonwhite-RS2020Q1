@@ -51,7 +51,6 @@ export default class DateAndTime {
     this.date = new Date(new Date().toLocaleString('en-US', { timeZone: 'UTC' }));
     this.lang = lang;
     this.setDate(timezone);
-    console.log(timezone);
     this.initTimer();
     document.addEventListener('languageChange', (e) => {
       this.lang = e.detail.dataset.lang;

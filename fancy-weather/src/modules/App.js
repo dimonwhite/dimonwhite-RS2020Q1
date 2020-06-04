@@ -68,11 +68,16 @@ export default class App {
     document.querySelector('.play').addEventListener('click', () => {
       this.listen.make(this.lang, this.weather);
     });
+    document.querySelector('.home').addEventListener('click', () => {
+      this.city = this.cityHome;
+      this.getInfo();
+    });
   }
 
   getCity() {
     fetchJSON(ipinfo)
       .then((data) => {
+        this.cityHome = data.city;
         this.city = data.city;
         this.getInfo();
       });
@@ -144,8 +149,7 @@ export default class App {
   changeImage() {
     const timesOfDay = getTimesOfDay(date.hours);
     const season = getSeason(date.month);
-    console.log(this, season, timesOfDay);
-    // this.image.getImage(`${timesOfDay},${season}`);
+    this.image.getImage(`${timesOfDay},${season}`);
   }
 
   setWeatherInfo(data) {
