@@ -78,7 +78,7 @@ export default class App {
     e.preventDefault();
     const { value } = e.target.querySelector('.search');
     if (value.length < 1) {
-      this.popup.showError('empty');
+      this.popup.showPopup('empty');
     } else {
       this.city = value;
       this.getInfo();
@@ -130,8 +130,8 @@ export default class App {
     this.getWeather();
   }
 
-  showError(text) {
-    this.popup.showError(text);
+  showError(key) {
+    this.popup.showPopup(key);
   }
 
   requestWeatherInfo() {

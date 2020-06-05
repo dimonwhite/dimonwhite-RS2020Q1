@@ -33,12 +33,12 @@ export default class Listen {
 
   changeVolume(value) {
     if (this.volume + value > 1) {
-      this.app.popup.showInfo(this[this.app.lang].listen.maxVolume);
+      this.app.popup.showPopup('maxVolume');
     } else if (this.volume + value < 0) {
-      this.app.popup.showInfo(this[this.app.lang].listen.minVolume);
+      this.app.popup.showPopup('minVolume');
     } else {
       this.volume += value;
-      this.app.popup.showInfo(`${this[this.app.lang].listen.volume} ${this.volume * 100}%`);
+      this.app.popup.showPopup('volume', `${Math.round(this.volume * 100)}%`);
     }
   }
 }

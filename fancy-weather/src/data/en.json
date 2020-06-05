@@ -45,11 +45,11 @@
   "listen": {
     "speakStart": "Weather for today",
     "degrees": "degrees",
-    "feelsLike": "feels like",
-    "maxVolume": "Maximum volume",
-    "minVolume": "The sound is already turned off",
-    "volume": "Volume"
+    "feelsLike": "feels like"
   },
+  "maxVolume": "Maximum volume",
+  "minVolume": "The sound is already turned off",
+  "volume": "Volume",
   "speak": {
     "voiceControl": "Voice control:",
     "listen": "Play",

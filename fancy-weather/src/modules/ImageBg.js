@@ -20,7 +20,7 @@ export default class ImageBg {
         this.generateImage();
       })
       .catch(() => {
-        this.error.showError('Не удалось получить изображение');
+        this.error.showPopup('Не удалось получить изображение');
       });
   }
 

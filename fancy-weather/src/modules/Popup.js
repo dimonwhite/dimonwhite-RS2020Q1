@@ -5,9 +5,9 @@ import be from '../data/be.json';
 export default class Popup {
   constructor(app) {
     this.app = app;
-    this.error = document.querySelector('.popup.error');
+    this.top = document.querySelector('.popup.top');
     this.info = document.querySelector('.popup.info');
-    this.errorText = this.error.querySelector('.popup_text');
+    this.topText = this.top.querySelector('.popup_text');
     this.closeSelector = '.popup_close';
     this.ru = ru;
     this.en = en;
@@ -23,14 +23,14 @@ export default class Popup {
     });
   }
 
-  showError(key) {
-    this.errorText.textContent = this[this.app.lang][key];
-    this.error.classList.add('active');
+  showPopup(key, text) {
+    this.topText.textContent = text ? `${this[this.app.lang][key]} ${text}` : this[this.app.lang][key];
+    this.top.classList.add('active');
     if (this.timer) {
       clearTimeout(this.timer);
     }
     this.timer = setTimeout(() => {
-      Popup.hidePopup(this.error);
+      Popup.hidePopup(this.top);
     }, 5000);
   }
 
