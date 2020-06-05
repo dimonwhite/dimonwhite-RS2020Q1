@@ -7,6 +7,9 @@
   "wind": "Wind:",
   "humidity": "Humidity:",
   "ms": "m/s",
+  "errorData": "Wrong data",
+  "errorImg": "Failed to get image",
+  "empty": "Empty request",
   "short": {
     "mon": "Mon",
     "tue": "Tue",
@@ -47,5 +50,12 @@
     "minVolume": "The sound is already turned off",
     "volume": "Volume"
   },
-  "speakText": "Code phrases: \"play\", \"Increase volume\", \"Decrease volume\""
+  "speak": {
+    "voiceControl": "Voice control:",
+    "listen": "Play",
+    "increase": "Increase volume",
+    "decrease": "Decrease volume",
+    "addFuncTitle": "Additional functionality:",
+    "addFunc": "Information output on a click on the map"
+  }
 }

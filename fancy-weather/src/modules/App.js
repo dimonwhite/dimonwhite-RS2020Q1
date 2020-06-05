@@ -26,8 +26,7 @@ export default class App {
       three: {},
     };
     this.translate = new Translate(this);
-    this.ymaps = window.ymaps;
-    this.popup = new Popup();
+    this.popup = new Popup(this);
     this.image = new ImageBg(this.popup, 600);
     this.listen = new Listen(this, weather);
     this.Speak = new Speak(this);
@@ -61,9 +60,7 @@ export default class App {
       });
     });
     document.querySelector('.header_form').addEventListener('submit', (e) => {
-      e.preventDefault();
-      this.city = e.target.querySelector('.search').value;
-      this.getInfo();
+      this.search(e);
     });
     document.querySelector('.play').addEventListener('click', () => {
       this.listen.make(this.lang, this.weather);
@@ -72,6 +69,20 @@ export default class App {
       this.city = this.cityHome;
       this.getInfo();
     });
+    document.querySelector('.infoBtn').addEventListener('click', () => {
+      this.popup.showInfo();
+    });
+  }
+
+  search(e) {
+    e.preventDefault();
+    const { value } = e.target.querySelector('.search');
+    if (value.length < 1) {
+      this.popup.showError('empty');
+    } else {
+      this.city = value;
+      this.getInfo();
+    }
   }
 
   getCity() {
@@ -94,7 +105,7 @@ export default class App {
         if (data.total_results > 0) {
           this.setInfo(data);
         } else {
-          this.showError('Неверные данные');
+          this.showError('errorData');
           this.stopPreloaded();
         }
       });
@@ -141,10 +152,8 @@ export default class App {
   }
 
   createMap() {
-    this.map = new Map(this.ymaps);
-    this.ymaps.ready(() => {
-      this.map.init();
-    });
+    this.map = new Map(this);
+    this.map.init();
   }
 
   changeImage() {

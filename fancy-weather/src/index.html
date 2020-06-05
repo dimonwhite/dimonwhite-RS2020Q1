@@ -22,8 +22,20 @@
         <div class="circularG_dot circularG_7"></div>
         <div class="circularG_dot circularG_8"></div>
     </div>
-    <div class="popup">
+    <div class="popup error">
         <div class="popup_text"></div>
+        <div class="popup_close"></div>
+    </div>
+
+    <div class="popup info">
+        <div class="popup_text">
+            <div class="strong" data-trs="speak.voiceControl">Voice control:</div>
+            <div class="text" data-trs="speak.increase">Increase volume</div>
+            <div class="text" data-trs="speak.decrease">Decrease volume</div>
+            <div class="text" data-trs="speak.listen">Play</div>
+            <div class="strong" data-trs="speak.addFuncTitle">Additional functionality:</div>
+            <div class="text" data-trs="speak.addFunc">Information output on a click on the map</div>
+        </div>
         <div class="popup_close"></div>
     </div>
     <main class="main">
@@ -55,17 +67,25 @@
                     </label>
                 </div>
 
-                <button class="home square_btn header_btn">
-                    <svg class="svg_icon">
-                        <use xlink:href="sprite.svg#home"></use>
-                    </svg>
-                </button>
+                <div class="header_btns_right">
+                    <button class="home square_btn header_btn">
+                        <svg class="svg_icon">
+                            <use xlink:href="sprite.svg#home"></use>
+                        </svg>
+                    </button>
 
-                <button class="play square_btn">
-                    <svg class="svg_icon">
-                        <use xlink:href="sprite.svg#play"></use>
-                    </svg>
-                </button>
+                    <button class="play square_btn header_btn">
+                        <svg class="svg_icon">
+                            <use xlink:href="sprite.svg#play"></use>
+                        </svg>
+                    </button>
+
+                    <button class="infoBtn square_btn header_btn">
+                        <svg class="svg_icon">
+                            <use xlink:href="sprite.svg#info"></use>
+                        </svg>
+                    </button>
+                </div>
             </div>
 
             <form class="header_form">

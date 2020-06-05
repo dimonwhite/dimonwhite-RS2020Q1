@@ -1,7 +1,3 @@
-import ru from '../data/ru.json';
-import en from '../data/en.json';
-import be from '../data/be.json';
-
 export default class Speak {
   constructor(app) {
     this.app = app;
@@ -11,9 +7,6 @@ export default class Speak {
     this.recognition = new this.MySpeechRecognition();
     this.start = false;
     this.input = document.querySelector('.search');
-    this.ru = ru;
-    this.en = en;
-    this.be = be;
   }
 
   init() {
@@ -49,7 +42,6 @@ export default class Speak {
       this.stopRecognition();
     } else {
       this.startRecognition();
-      this.app.popup.showInfo(this[this.app.lang].speakText);
     }
   }
 

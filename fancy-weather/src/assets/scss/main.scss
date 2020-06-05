@@ -124,7 +124,7 @@ button {
     align-items: center;
     padding-top: 2rem;
     margin-bottom: 2rem;
-    @include media(630px) {
+    @include media(780px) {
         flex-direction: column-reverse;
         padding-top: 1rem;
         margin-bottom: 1.5rem;
@@ -132,6 +132,19 @@ button {
     &_btns {
         display: flex;
         align-items: center;
+        @include media(630px) {
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        &_right {
+            display: flex;
+            align-items: center;
+            @include media(630px) {
+                padding-top: 1rem;
+                width: 100%;
+                justify-content: center;
+            }
+        }
     }
     &_btn {
         margin-right: 0.5rem;
@@ -141,30 +154,32 @@ button {
     }
     &_form {
         display: flex;
-        @include media(630px) {
+        @include media(780px) {
             margin-bottom: 1rem;
         }
     }
 }
 
-.square_btn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 2rem;
-    height: 2rem;
+.square {
+    &_btn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 2rem;
+        height: 2rem;
 
-    border-radius: 0.2rem;
-    background-color: $grey;
-    background-repeat: no-repeat;
-    background-position: left bottom;
-    background-size: contain;
-    background-image: url("data:image/svg+xml,%3Csvg width='44' height='44' viewBox='0 0 44 44' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M27.2218 44L7.2218 24L0 31.2218V39C0 41.7614 2.23858 44 5 44H27.2218Z' fill='%23AEB5B9' fill-opacity='0.5'/%3E%3Cpath d='M34.2218 14L44 23.7782V39C44 41.7614 41.7614 44 39 44H27.2218L15.7218 32.5L34.2218 14Z' fill='%23AEB5B9' fill-opacity='0.3'/%3E%3Cpath d='M9 13C11.2091 13 13 11.2091 13 9C13 6.79086 11.2091 5 9 5C6.79086 5 5 6.79086 5 9C5 11.2091 6.79086 13 9 13Z' fill='white' fill-opacity='0.3'/%3E%3C/svg%3E%0A");
-    .svg_icon {
-        width: 1.2rem;
-        height: 1.2rem;
+        border-radius: 0.2rem;
+        background-color: $grey;
+        background-repeat: no-repeat;
+        background-position: left bottom;
+        background-size: contain;
+        background-image: url("data:image/svg+xml,%3Csvg width='44' height='44' viewBox='0 0 44 44' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M27.2218 44L7.2218 24L0 31.2218V39C0 41.7614 2.23858 44 5 44H27.2218Z' fill='%23AEB5B9' fill-opacity='0.5'/%3E%3Cpath d='M34.2218 14L44 23.7782V39C44 41.7614 41.7614 44 39 44H27.2218L15.7218 32.5L34.2218 14Z' fill='%23AEB5B9' fill-opacity='0.3'/%3E%3Cpath d='M9 13C11.2091 13 13 11.2091 13 9C13 6.79086 11.2091 5 9 5C6.79086 5 5 6.79086 5 9C5 11.2091 6.79086 13 9 13Z' fill='white' fill-opacity='0.3'/%3E%3C/svg%3E%0A");
+        .svg_icon {
+            width: 1.2rem;
+            height: 1.2rem;
 
-        fill: #ffffff;
+            fill: #ffffff;
+        }
     }
 }
 
@@ -585,45 +600,60 @@ button {
 }
 
 $red: #f8aeae;
-$green: #5ef87a;
 
 .popup {
     position: absolute;
     top: 0;
-    left: 50%;
     z-index: 10;
 
-    padding: 0.5rem 3rem 0.5rem 1rem;
-    min-height: 1rem;
+    min-height: 2rem;
     max-width: 100%;
-
-    color: $green;
+    padding: 0.5rem 3rem 0.5rem 1rem;
 
     border-radius: 0 0 0.3rem 0.3rem;
     background-color: $grey;
-    transform: translate(-50%, -100%);
 
     transition: transform 0.6s;
     &.error {
+        left: 50%;
+
+        display: flex;
+        align-items: center;
+
         color: $red;
+
+        transform: translate(-50%, -100%);
+        &.active {
+            transform: translate(-50%, 0);
+        }
+        @include media(630px) {
+            width: 100%;
+        }
+    }
+    &.info {
+        left: 0;
+
+        color: #000;
+
+        background-color: #AEB5B9;
+        transform: translateY(-100%);
+        &.active {
+            transform: translateY(0);
+        }
     }
     @include media(630px) {
         padding: 0.3rem 2rem 0.3rem 0.5rem;
 
-        font-size: 0.5rem;
-    }
-    &.active {
-        transform: translate(-50%, 0);
+        font-size: 0.8rem;
     }
     &_close {
         position: absolute;
-        top: 50%;
+        top: 0.5rem;
         right: 0.5rem;
 
         width: 1rem;
         height: 1rem;
 
-        transform: translateY(-50%);
         cursor: pointer;
         &:before, &:after {
             content: '';
@@ -643,6 +673,15 @@ $green: #5ef87a;
         }
         &:after {
             transform: rotate(-45deg);
+        }
+    }
+    .strong {
+        margin-bottom: 0.3rem;
+        padding-top: 0.5rem;
+
+        font-weight: 600;
+        &:first-child {
+            padding-top: 0;
         }
     }
 }
@@ -805,7 +844,7 @@ $green: #5ef87a;
     }
 }
 
-.play, .home {
+.play, .home, .infoBtn {
     &:hover {
         .svg_icon {
             opacity: 0.5;
