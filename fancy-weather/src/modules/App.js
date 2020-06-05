@@ -36,13 +36,11 @@ export default class App {
   init() {
     this.dropdown = new Dropdown('.dropdown', '.dropdown_top', '.dropdown_list');
     this.dropdown.init();
-
     this.translate.init();
+    weather.init();
     this.lang = this.translate.lang;
-
     this.getCity();
     this.createMap();
-    App.changeRadioDegrees();
     this.addListeners();
     this.dropdown.changeActiveElement(document.querySelector(`[data-lang=${this.lang}]`));
     this.popup.init();
@@ -54,11 +52,6 @@ export default class App {
       .addEventListener('click', () => {
         this.changeImage();
       });
-    document.querySelectorAll('.radio_input').forEach((radio) => {
-      radio.addEventListener('change', (e) => {
-        weather.changeDegrees(e.target.value);
-      });
-    });
     document.querySelector('.header_form').addEventListener('submit', (e) => {
       this.search(e);
     });
@@ -78,7 +71,7 @@ export default class App {
     e.preventDefault();
     const { value } = e.target.querySelector('.search');
     if (value.length < 1) {
-      this.popup.showPopup('empty');
+      this.showError('empty');
     } else {
       this.city = value;
       this.getInfo();
@@ -113,14 +106,7 @@ export default class App {
 
   setInfo(data) {
     const info = data.results[0];
-    this.info.city = info.components.hamlet || info.components.village
-      || info.components.city || info.components.county || info.components.neighbourhood
-      || info.components.state || info.components.region;
-    if (!this.info.city) {
-      // eslint-disable-next-line no-underscore-dangle
-      const type = info.components._type;
-      this.info.city = info.components[type];
-    }
+    this.setInfoCity(info);
     this.info.country = info.components.country;
     this.fullLat = info.geometry.lat;
     this.fullLng = info.geometry.lng;
@@ -128,6 +114,17 @@ export default class App {
     this.info.lng = changeGeometry(String(info.geometry.lng));
     this.timezone = info.annotations.timezone.offset_sec / 3600;
     this.getWeather();
+  }
+
+  setInfoCity(info) {
+    this.info.city = info.components.hamlet || info.components.village
+        || info.components.city || info.components.county || info.components.neighbourhood
+        || info.components.state || info.components.region;
+    if (!this.info.city) {
+      // eslint-disable-next-line no-underscore-dangle
+      const type = info.components._type;
+      this.info.city = info.components[type];
+    }
   }
 
   showError(key) {
@@ -151,17 +148,6 @@ export default class App {
       });
   }
 
-  createMap() {
-    this.map = new Map(this);
-    this.map.init();
-  }
-
-  changeImage() {
-    const timesOfDay = getTimesOfDay(date.hours);
-    const season = getSeason(date.month);
-    this.image.getImage(`${timesOfDay},${season}`);
-  }
-
   setWeatherInfo(data) {
     const { current } = data;
     this.weather.degrees = Math.round(current.temp);
@@ -177,8 +163,17 @@ export default class App {
     weather.changeInfo(this.weather);
   }
 
-  static changeRadioDegrees() {
-    document.querySelector(`[value="${weather.degreesFormat}"]`).checked = true;
+  createMap() {
+    this.map = new Map(this);
+    this.map.init();
+  }
+
+  changeImage() {
+    const timesOfDay = getTimesOfDay(date.hours);
+    const season = getSeason(date.month);
+    // eslint-disable-next-line no-console
+    console.log(`Keywords: ${timesOfDay},${season}`);
+    this.image.getImage(`${timesOfDay},${season}`);
   }
 
   startPreloaded() {

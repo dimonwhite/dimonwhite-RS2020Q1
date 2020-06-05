@@ -9,6 +9,15 @@ export default class Weather {
     this.imageWeather = new ImageWeather();
   }
 
+  init() {
+    document.querySelector(`[value="${this.degreesFormat}"]`).checked = true;
+    document.querySelectorAll('.radio_input').forEach((radio) => {
+      radio.addEventListener('change', (e) => {
+        this.changeDegrees(e.target.value);
+      });
+    });
+  }
+
   changeInfo(info) {
     this.changeText(info);
     this.changeImgs(info);

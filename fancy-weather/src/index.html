@@ -1,172 +1,181 @@
 <!doctype html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Fancy Weather</title>
-    <link rel="icon" href="./favicon.ico" type="image/ico">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Fancy Weather</title>
+  <link rel="icon" href="./favicon.ico" type="image/ico">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body class="container">
-    <div class="firstBg"></div>
-    <div class="secondBg"></div>
-    <div class="preloaded circularG">
-        <div class="circularG_dot circularG_1"></div>
-        <div class="circularG_dot circularG_2"></div>
-        <div class="circularG_dot circularG_3"></div>
-        <div class="circularG_dot circularG_4"></div>
-        <div class="circularG_dot circularG_5"></div>
-        <div class="circularG_dot circularG_6"></div>
-        <div class="circularG_dot circularG_7"></div>
-        <div class="circularG_dot circularG_8"></div>
-    </div>
-    <div class="popup top">
-        <div class="popup_text"></div>
-        <div class="popup_close"></div>
-    </div>
+<div class="firstBg"></div>
+<div class="secondBg"></div>
+<div class="preloaded circularG">
+  <div class="circularG_dot circularG_1"></div>
+  <div class="circularG_dot circularG_2"></div>
+  <div class="circularG_dot circularG_3"></div>
+  <div class="circularG_dot circularG_4"></div>
+  <div class="circularG_dot circularG_5"></div>
+  <div class="circularG_dot circularG_6"></div>
+  <div class="circularG_dot circularG_7"></div>
+  <div class="circularG_dot circularG_8"></div>
+</div>
+<div class="popup top">
+  <div class="popup_text"></div>
+  <div class="popup_close"></div>
+</div>
 
-    <div class="popup info">
-        <div class="popup_text">
-            <div class="strong" data-trs="speak.voiceControl">Voice control:</div>
-            <div class="text" data-trs="speak.increase">Increase volume</div>
-            <div class="text" data-trs="speak.decrease">Decrease volume</div>
-            <div class="text" data-trs="speak.listen">Play</div>
-            <div class="strong" data-trs="speak.addFuncTitle">Additional functionality:</div>
-            <div class="text" data-trs="speak.addFunc">Information output on a click on the map</div>
+<div class="popup info">
+  <div class="popup_text">
+    <div class="strong" data-trs="speak.voiceControl">Voice control:</div>
+    <div class="text" data-trs="speak.increase">Increase volume</div>
+    <div class="text" data-trs="speak.decrease">Decrease volume</div>
+    <div class="text" data-trs="speak.listen">Play</div>
+    <div class="strong" data-trs="speak.addFuncTitle">Additional functionality:</div>
+    <div class="text" data-trs="speak.addFunc">Information output on a click on the map</div>
+  </div>
+  <div class="popup_close"></div>
+</div>
+<main class="main">
+  <header class="header">
+    <div class="header_btns">
+      <button class="update square_btn header_btn">
+        <svg class="svg_icon">
+          <use xlink:href="sprite.svg#update"></use>
+        </svg>
+      </button>
+      <div class="dropdown header_btn">
+        <div class="dropdown_top">
+          <div class="dropdown_text">EN</div>
         </div>
-        <div class="popup_close"></div>
+        <ul class="dropdown_list">
+          <li class="dropdown_list_item active" data-lang="en">EN</li>
+          <li class="dropdown_list_item" data-lang="ru">RU</li>
+          <li class="dropdown_list_item" data-lang="be">BE</li>
+        </ul>
+      </div>
+      <div class="radio header_btn">
+        <label class="radio_item">
+          <input class="radio_input" type="radio" value="fah" name="degrees">
+          <span class="radio_text">°F</span>
+        </label>
+        <label class="radio_item">
+          <input class="radio_input" type="radio" value="cel" name="degrees" checked>
+          <span class="radio_text">°С</span>
+        </label>
+      </div>
+
+      <div class="header_btns_right">
+        <button class="home square_btn header_btn">
+          <svg class="svg_icon">
+            <use xlink:href="sprite.svg#home"></use>
+          </svg>
+        </button>
+
+        <button class="play square_btn header_btn">
+          <svg class="svg_icon">
+            <use xlink:href="sprite.svg#play"></use>
+          </svg>
+        </button>
+
+        <button class="infoBtn square_btn header_btn">
+          <svg class="svg_icon">
+            <use xlink:href="sprite.svg#info"></use>
+          </svg>
+        </button>
+      </div>
     </div>
-    <main class="main">
-        <header class="header">
-            <div class="header_btns">
-                <button class="update square_btn header_btn">
-                    <svg class="svg_icon">
-                        <use xlink:href="sprite.svg#update"></use>
-                    </svg>
-                </button>
-                <div class="dropdown header_btn">
-                    <div class="dropdown_top">
-                        <div class="dropdown_text">EN</div>
-                    </div>
-                    <ul class="dropdown_list">
-                        <li class="dropdown_list_item active" data-lang="en">EN</li>
-                        <li class="dropdown_list_item" data-lang="ru">RU</li>
-                        <li class="dropdown_list_item" data-lang="be">BE</li>
-                    </ul>
-                </div>
-                <div class="radio header_btn">
-                    <label class="radio_item">
-                        <input class="radio_input" type="radio" value="fah" name="degrees">
-                        <span class="radio_text">°F</span>
-                    </label>
-                    <label class="radio_item">
-                        <input class="radio_input" type="radio" value="cel" name="degrees" checked>
-                        <span class="radio_text">°С</span>
-                    </label>
-                </div>
 
-                <div class="header_btns_right">
-                    <button class="home square_btn header_btn">
-                        <svg class="svg_icon">
-                            <use xlink:href="sprite.svg#home"></use>
-                        </svg>
-                    </button>
+    <form class="header_form">
+      <div class="search_wrap">
+        <input class="search" type="text" placeholder="Search city or ZIP" data-trs="searchPlaceholder">
+        <button class="mic" type="button">
+          <svg class="svg_icon">
+            <use xlink:href="sprite.svg#mic"></use>
+          </svg>
+        </button>
+      </div>
+      <button class="btn" data-trs="searchBtn">Search</button>
+    </form>
+  </header>
 
-                    <button class="play square_btn header_btn">
-                        <svg class="svg_icon">
-                            <use xlink:href="sprite.svg#play"></use>
-                        </svg>
-                    </button>
-
-                    <button class="infoBtn square_btn header_btn">
-                        <svg class="svg_icon">
-                            <use xlink:href="sprite.svg#info"></use>
-                        </svg>
-                    </button>
-                </div>
-            </div>
-
-            <form class="header_form">
-                <div class="search_wrap">
-                    <input class="search" type="text" placeholder="Search city or ZIP" data-trs="searchPlaceholder">
-                    <button class="mic" type="button">
-                        <svg class="svg_icon">
-                            <use xlink:href="sprite.svg#mic"></use>
-                        </svg>
-                    </button>
-                </div>
-                <button class="btn" data-trs="searchBtn">Search</button>
-            </form>
-        </header>
-
-        <section class="app">
-            <div class="weather">
-                <div class="weather_city"><span data-info="city" data-trs="city"></span>, <span data-info="country" data-trs="country"></span></div>
-                <div class="weather_date">
-                    <span class="date"><span class="dayWeek" data-trs="short.mon"></span> <span class="dayMonth"></span> <span class="month" data-trs="months.october"></span></span>
-                    <span class="time">
+  <section class="app">
+    <div class="weather">
+      <div class="weather_city"><span data-info="city" data-trs="city"></span>, <span data-info="country"
+                                                                                      data-trs="country"></span></div>
+      <div class="weather_date">
+        <span class="date"><span class="dayWeek" data-trs="short.mon"></span> <span class="dayMonth"></span> <span
+          class="month" data-trs="months.october"></span></span>
+        <span class="time">
                         <span class="hours"></span>:<span class="minutes"></span>:<span class="seconds"></span>
                     </span>
-                </div>
-                <div class="weather_main">
-                    <div class="weather_main_degrees degreesNumber" data-weather="degrees">10</div>
-                    <div class="weather_info">
-                        <div class="weather_main_img" data-img="img"></div>
-                        <div class="weather_text" data-weather="weather" data-trs="weather">overcast</div>
-                        <div class="feels">
-                            <span class="feels_title" data-trs="feelsLike">Feels like:</span> <span class="degrees degreesNumber" data-weather="feelsLike">7</span>°
-                        </div>
-                        <div class="wind">
-                            <span class="wind_title" data-trs="wind">Wind:</span> <span class="value" data-weather="wind">2</span> <span data-trs="ms">m/s</span>
-                        </div>
-                        <div class="humidity">
-                            <span class="humidity_title" data-trs="humidity">Humidity:</span> <span class="value" data-weather="humidity">83</span>%
-                        </div>
-                    </div>
-                </div>
-                <div class="briefly">
-                    <div class="briefly_item">
-                        <div class="briefly_item_day one_day" data-trs="full.wed">Tuesday</div>
-                        <div class="briefly_item_bottom">
-                            <div class="briefly_item_degrees"><span class="degreesNumber" data-weather="one.degrees">7</span>°</div>
-                            <div class="briefly_item_img" data-img="one.img"></div>
-                        </div>
-                    </div>
-                    <div class="briefly_item">
-                        <div class="briefly_item_day two_day" data-trs="full.wed">Wednesday</div>
-                        <div class="briefly_item_bottom">
-                            <div class="briefly_item_degrees"><span class="degreesNumber" data-weather="two.degrees">7</span>°</div>
-                            <div class="briefly_item_img" data-img="two.img"></div>
-                        </div>
-                    </div>
-                    <div class="briefly_item">
-                        <div class="briefly_item_day three_day" data-trs="full.thu">Thursday</div>
-                        <div class="briefly_item_bottom">
-                            <div class="briefly_item_degrees"><span class="degreesNumber" data-weather="three.degrees">7</span>°</div>
-                            <div class="briefly_item_img" data-img="three.img"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="app_right">
-                <div class="map" id="map"></div>
-                <div class="location">
-                    <div class="latitude">
-                        <span class="latitude_title" data-trs="latitude">Latitude:</span> <span class="value" data-info="lat"></span>
-                    </div>
-                    <div class="longitude">
-                        <span class="longitude_title" data-trs="longitude">Longitude:</span> <span class="value" data-info="lng"></span>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
+      </div>
+      <div class="weather_main">
+        <div class="weather_main_degrees degreesNumber" data-weather="degrees">10</div>
+        <div class="weather_info">
+          <div class="weather_main_img" data-img="img"></div>
+          <div class="weather_text" data-weather="weather" data-trs="weather">overcast</div>
+          <div class="feels">
+            <span class="feels_title" data-trs="feelsLike">Feels like:</span> <span class="degrees degreesNumber"
+                                                                                    data-weather="feelsLike">7</span>°
+          </div>
+          <div class="wind">
+            <span class="wind_title" data-trs="wind">Wind:</span> <span class="value" data-weather="wind">2</span> <span
+            data-trs="ms">m/s</span>
+          </div>
+          <div class="humidity">
+            <span class="humidity_title" data-trs="humidity">Humidity:</span> <span class="value"
+                                                                                    data-weather="humidity">83</span>%
+          </div>
+        </div>
+      </div>
+      <div class="briefly">
+        <div class="briefly_item">
+          <div class="briefly_item_day one_day" data-trs="full.wed">Tuesday</div>
+          <div class="briefly_item_bottom">
+            <div class="briefly_item_degrees"><span class="degreesNumber" data-weather="one.degrees">7</span>°</div>
+            <div class="briefly_item_img" data-img="one.img"></div>
+          </div>
+        </div>
+        <div class="briefly_item">
+          <div class="briefly_item_day two_day" data-trs="full.wed">Wednesday</div>
+          <div class="briefly_item_bottom">
+            <div class="briefly_item_degrees"><span class="degreesNumber" data-weather="two.degrees">7</span>°</div>
+            <div class="briefly_item_img" data-img="two.img"></div>
+          </div>
+        </div>
+        <div class="briefly_item">
+          <div class="briefly_item_day three_day" data-trs="full.thu">Thursday</div>
+          <div class="briefly_item_bottom">
+            <div class="briefly_item_degrees"><span class="degreesNumber" data-weather="three.degrees">7</span>°</div>
+            <div class="briefly_item_img" data-img="three.img"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="app_right">
+      <div class="map" id="map"></div>
+      <div class="location">
+        <div class="latitude">
+          <span class="latitude_title" data-trs="latitude">Latitude:</span> <span class="value" data-info="lat"></span>
+        </div>
+        <div class="longitude">
+          <span class="longitude_title" data-trs="longitude">Longitude:</span> <span class="value"
+                                                                                     data-info="lng"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
 
-    <svg class="svg">
-        <clipPath id="my-clip-path" clipPathUnits="objectBoundingBox"><path d="m0.146,0 c-0.081,0,-0.146,0.058,-0.146,0.131 v0.632 c0,0.073,0.065,0.131,0.146,0.131 h0.687 l0.167,0.106 v-0.245 l0,0 v-0.624 c0,-0.073,-0.065,-0.131,-0.146,-0.131 h-0.707"></path></clipPath>
-    </svg>
-    <script src="https://api-maps.yandex.ru/2.1?apikey=ff36289b-6994-429a-a7e5-ec2aad424012&lang=en_US"></script>
+<svg class="svg">
+  <clipPath id="my-clip-path" clipPathUnits="objectBoundingBox">
+    <path
+      d="m0.146,0 c-0.081,0,-0.146,0.058,-0.146,0.131 v0.632 c0,0.073,0.065,0.131,0.146,0.131 h0.687 l0.167,0.106 v-0.245 l0,0 v-0.624 c0,-0.073,-0.065,-0.131,-0.146,-0.131 h-0.707"></path>
+  </clipPath>
+</svg>
+<script src="https://api-maps.yandex.ru/2.1?apikey=ff36289b-6994-429a-a7e5-ec2aad424012&lang=en_US"></script>
 </body>
 </html>
